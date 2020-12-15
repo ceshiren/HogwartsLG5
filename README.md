@@ -4,4 +4,5 @@
 - [python脚本作业](/test_python/demo.py)
 
 ## 霍格沃兹测试学院
-- https://ceshiren.com
+- [测试人论坛](https://ceshiren.com)
+- [霍格沃兹测试学院](https://testing-studio.com)
