@@ -1,2 +1,2 @@
 print('seveniruby')
-print('zgl')
+print('zgl1')
