@@ -1,2 +1,2 @@
 print('seveniruby')
-print('zgl1')
+print('zglcommit')
