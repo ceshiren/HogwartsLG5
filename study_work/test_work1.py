@@ -24,7 +24,7 @@ class TestDemo:
         pass
 
     @allure.story('加法测试')
-    @pytest.mark.parametrize(['a','b','exp'],read_yaml('add'))
+    @pytest.mark.parametrize(['a','b','exp'],read_yaml('add'),ids=read_yaml('add_ids'))
     def test_add(self,a,b,exp):
         res = self.demo.add(a,b)
         assert res == exp
