@@ -7,7 +7,6 @@
 - [pytest实战作业_日志封装](/study_work/logs.py)
 - [pytest实战作业_yaml文件封装](/study_work/read_yaml.py)
 - [pytest实战作业_yaml数据维护](/config/work.yaml)
-- [pytest实战作业_测试报告XML目录](/allure_report)
 
 ## 霍格沃兹测试学院
 - [测试人论坛](https://ceshiren.com)
