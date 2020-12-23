@@ -39,9 +39,7 @@ def _logging(**kwargs):
     return filename.split('runlog.log.')[1]
   # backupCount 保存日志的数量，过期自动删除
   # when 按什么日期格式切分(这里方便测试使用的秒)
-  if os.path.exists('../log'):#判断目录是否存在
-    pass
-  else:
+  if not os.path.exists('../log'):#判断目录是否存在
     os.makedirs('../log')
   th_debug = handlers.TimedRotatingFileHandler(filename=filename, when='S', backupCount=3,
                                                encoding='utf-8')
