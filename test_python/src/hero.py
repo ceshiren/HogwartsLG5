@@ -1,4 +1,5 @@
 from typing import List
+
 from test_python.src.log import log
 
 def log_decorator(func):
@@ -9,9 +10,9 @@ def log_decorator(func):
     """
 
 
-    def wrapper(*args,**kwargs):
+    def wrapper(*args, **kwargs):
         log.debug(f'{log_decorator.__name__} --> {func.__name__}')
-        return func(*args,**kwargs)
+        return func(*args, **kwargs)
 
     return wrapper
 
@@ -23,7 +24,7 @@ class Hero:
     tools = []
 
     @log_decorator
-    def fight(self,hero:'Hero'):
+    def fight(self, hero: 'Hero'):
         while True:
             hero.hp -= self.power
             if self.winner(self,hero):
@@ -33,7 +34,7 @@ class Hero:
                 return False
 
     @log_decorator
-    def winner(self,hero1,hero2):
+    def winner(self, hero1, hero2):
         log.debug(f'{hero1} VS {hero2}')
         if hero1.hp <= 0:
             log.debug('Flase')
@@ -42,5 +43,5 @@ class Hero:
             log.debug('True')
             return True
 
-    def fight_many(self, heros:List['Hero']):
+    def fight_many(self, heros: List['Hero']):
         pass
