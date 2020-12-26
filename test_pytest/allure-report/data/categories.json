@@ -1,0 +1,89 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "children" : [ {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "_pytest.fixtures.FixtureLookupError: ('get_calc', <FixtureRequest for <Function test_add[int]>>)",
+      "children" : [ {
+        "name" : "test_add[int]",
+        "uid" : "8404658fa789309f",
+        "parentUid" : "2d78b52eba7e7de84a7e79c1e05879de",
+        "status" : "broken",
+        "time" : {
+          "start" : 1608991529269,
+          "stop" : 1608991529269,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "parameters" : [ "[3, 3, 6]" ]
+      } ],
+      "uid" : "2d78b52eba7e7de84a7e79c1e05879de"
+    }, {
+      "name" : "_pytest.fixtures.FixtureLookupError: ('get_calc', <FixtureRequest for <Function test_add[minus]>>)",
+      "children" : [ {
+        "name" : "test_add[minus]",
+        "uid" : "371eaf3404cd34a4",
+        "parentUid" : "c8e55fc0464536116305c6a39ce0b368",
+        "status" : "broken",
+        "time" : {
+          "start" : 1608991529280,
+          "stop" : 1608991529280,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "parameters" : [ "[-1, -2, -3]" ]
+      } ],
+      "uid" : "c8e55fc0464536116305c6a39ce0b368"
+    }, {
+      "name" : "_pytest.fixtures.FixtureLookupError: ('get_calc', <FixtureRequest for <Function test_add[bigint]>>)",
+      "children" : [ {
+        "name" : "test_add[bigint]",
+        "uid" : "daa72174edc4d199",
+        "parentUid" : "a837afa183518be159a07621bb284f58",
+        "status" : "broken",
+        "time" : {
+          "start" : 1608991529283,
+          "stop" : 1608991529283,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "parameters" : [ "[1000, 1000, 2000]" ]
+      } ],
+      "uid" : "a837afa183518be159a07621bb284f58"
+    }, {
+      "name" : "_pytest.fixtures.FixtureLookupError: ('get_calc', <FixtureRequest for <Function test_add[float]>>)",
+      "children" : [ {
+        "name" : "test_add[float]",
+        "uid" : "2aabc5abc9e665b6",
+        "parentUid" : "72ff04283220ed7d427a3ee3d8e7b5c4",
+        "status" : "broken",
+        "time" : {
+          "start" : 1608991529286,
+          "stop" : 1608991529286,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "parameters" : [ "[0.1, 0.2, 0.3]" ]
+      } ],
+      "uid" : "72ff04283220ed7d427a3ee3d8e7b5c4"
+    }, {
+      "name" : "_pytest.fixtures.FixtureLookupError: ('get_calc', <FixtureRequest for <Function test_add[except]>>)",
+      "children" : [ {
+        "name" : "test_add[except]",
+        "uid" : "cf7c4aeb8b390eb7",
+        "parentUid" : "2e55d0f236f01f86bf1c5813f6f5a537",
+        "status" : "broken",
+        "time" : {
+          "start" : 1608991529288,
+          "stop" : 1608991529288,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "parameters" : [ "['', 5, '请输入数字']" ]
+      } ],
+      "uid" : "2e55d0f236f01f86bf1c5813f6f5a537"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  } ],
+  "name" : "categories"
+}
