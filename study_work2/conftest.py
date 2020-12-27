@@ -1,10 +1,10 @@
 import pytest
-import os
-from work2 import Demo
+from study_work2.work2 import *
 import yaml
-from config.log_main import *
+from config.log_main2 import logger
 
-# logger = _logging()
+print('我是conftest.py文件，所有用例都要先跑这个文件')
+
 def read_yaml(file=r'../config/work.yaml'):
     with open(file,'r') as fs :
         rs = yaml.load(fs,Loader=yaml.FullLoader)
@@ -19,7 +19,7 @@ def demo():
     demo = Demo()
     return demo
 
-@pytest.fixture(params=read_taml['add'],ids=read_taml['add_ids'],scope='module')
+@pytest.fixture(params=read_taml['add'],scope='module')
 def get_add_datas(request):
     '''拿到yaml加法数据'''
     logger.info('开始add计算***************************')
@@ -52,4 +52,4 @@ def get_mul_datas(request):
     logger.info('结束mul计算***************************')
 
 if __name__ == '__main__':
-    print(read_taml)
+    pass

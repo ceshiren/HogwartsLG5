@@ -3,7 +3,7 @@ import pytest
 import allure
 from work1 import Demo
 from read_yaml import *
-from config.log_main import _logging
+from config.log_main1 import _logging
 
 
 @allure.feature('测试算数类')

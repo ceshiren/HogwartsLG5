@@ -1,19 +1,6 @@
 import logging
 from logging import handlers
 import os
-"""
-解决乱码问题两种方式：
-1、修改底层代码logging的init文件FileHandler(StreamHandler)，encoding默认给utf-8格式
-2、通过输出流来读取文件，filename= 替换stream=file来打开文件，弊端，文件需一直打开，操作的时候
-# file = open('../log/runlog.log',encoding="utf-8", mode="a")#修改输出流，防止中文乱码
-"""
-logging.basicConfig(filename= '../log/runlog.log',level=logging.INFO,
-                    format="%(asctime)s ""%(filename)s [line:%(lineno)d] ""%(levelname)s>""%(message)s",
-                    datefmt="%Y-%m-%d %H:%M:%S"
-                    ,filemode='a'
-                    )
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 """
 1、更高级的日志切割封装，目前为了展示效果按S切割日志
@@ -40,13 +27,12 @@ def _logging(**kwargs):
   # when 按什么日期格式切分(这里方便测试使用的秒)
   if not os.path.exists('../log'):#判断目录是否存在
     os.makedirs('../log')
-  th_debug = handlers.TimedRotatingFileHandler(filename=filename, when='S', backupCount=3,
+  th_debug = handlers.TimedRotatingFileHandler(filename=filename, when='S', backupCount=1,
                                                encoding='utf-8')
   th_debug.namer = split_namer
   th_debug.suffix = '../log/'+"%Y-%m-%d_%H-%M-%S.log"
   th_debug.setFormatter(format_str)
-  th_debug.setLevel(logging.DEBUG)
+  # th_debug.setLevel(logging.DEBUG)
   log.addHandler(th_debug)
   log.setLevel(level)
-  #判断目录是否存在
   return log
