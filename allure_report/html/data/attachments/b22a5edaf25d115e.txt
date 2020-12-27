@@ -1,0 +1,7 @@
+INFO     root:conftest.py:36 结束divi计算***************************
+INFO     root:conftest.py:33 开始divi计算***************************
+INFO     root:test_work2.py:20 计算正确:计算得出2.0,比较值2
+INFO     root:conftest.py:36 结束divi计算***************************
+INFO     root:conftest.py:52 结束mul计算***************************
+INFO     root:conftest.py:44 结束sub计算***************************
+INFO     root:conftest.py:28 结束add计算***************************

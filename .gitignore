@@ -1,3 +1,6 @@
 /venv/
 /.idea/
 tmp
+/pytest/
+/test_git/
+/test_python/

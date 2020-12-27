@@ -1,7 +1,6 @@
 import logging
 from logging import handlers
 import os
-'''
 """
 解决乱码问题两种方式：
 1、修改底层代码logging的init文件FileHandler(StreamHandler)，encoding默认给utf-8格式
@@ -11,10 +10,10 @@ import os
 logging.basicConfig(filename= '../log/runlog.log',level=logging.INFO,
                     format="%(asctime)s ""%(filename)s [line:%(lineno)d] ""%(levelname)s>""%(message)s",
                     datefmt="%Y-%m-%d %H:%M:%S"
+                    ,filemode='a'
                     )
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-'''
 
 """
 1、更高级的日志切割封装，目前为了展示效果按S切割日志
