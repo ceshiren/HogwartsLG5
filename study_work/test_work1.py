@@ -57,4 +57,4 @@ class TestDemo:
         self.logger.info(f'计算正确:计算得出{res},比较值{exp}')
 
 if __name__ == '__main__':
-    pytest.main(['test_work2.py','-sq' , '--alluredir=../allure_report/xml'])
+    pytest.main(['test_work1.py','-sq' , '--alluredir=../allure_report/xml'])
