@@ -1,0 +1,61 @@
+{
+  "uid" : "2aabc5abc9e665b6",
+  "name" : "test_add[float]",
+  "fullName" : "test_calc_new.TestCalc#test_add",
+  "historyId" : "76dc4a1486ada3a46106ab1492b58ac7",
+  "time" : {
+    "start" : 1608991529286,
+    "stop" : 1608991529286,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "_pytest.fixtures.FixtureLookupError: ('get_calc', <FixtureRequest for <Function test_add[float]>>)",
+  "statusTrace" : "file /Users/mac/hogwarts_class/HogwartsLG5/test_pytest/test_calc_new.py, line 11\n      def test_add(self, get_calc, get_datas):\nE       fixture 'get_calc' not found\n>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, connectDB, doctest_namespace, get_datas, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, testrun_uid, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, worker_id\n>       use 'pytest --fixtures [testpath]' for help on them.\n\n/Users/mac/hogwarts_class/HogwartsLG5/test_pytest/test_calc_new.py:11",
+  "flaky" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "test_calc_new"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestCalc"
+  }, {
+    "name" : "host",
+    "value" : "feier.lan"
+  }, {
+    "name" : "thread",
+    "value" : "98262-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_calc_new"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "get_datas",
+    "value" : "[0.1, 0.2, 0.3]"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "2aabc5abc9e665b6.json",
+  "parameterValues" : [ "[0.1, 0.2, 0.3]" ]
+}
