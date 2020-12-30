@@ -13,6 +13,7 @@ class TestCal:
     def teardown_method(self):
         print("\n计算结束")
 
+    @pytest.fixture()
     @pytest.mark.parametrize("a,b,exc",yaml.safe_load(open("/Users/liuwenhui/HogwartsLG5/test_calculator/data.yml"))["add_data"])
     def test_add(self,a,b,exc):
         result = self.calc.add(a,b)
