@@ -2,6 +2,7 @@
 
 ## 作业列表
 - [python脚本作业](/test_python/src/demo.py)
+- [pytest第一次作业](/pytest_work)
 
 ## 霍格沃兹测试学院
 - [测试人论坛](https://ceshiren.com)
