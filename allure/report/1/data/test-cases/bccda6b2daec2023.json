@@ -1,0 +1,109 @@
+{
+  "uid" : "bccda6b2daec2023",
+  "name" : "test_add[except]",
+  "fullName" : "test_cal_new.TestCalc#test_add",
+  "historyId" : "1b83f4905575390cd67cc1b92e20f997",
+  "time" : {
+    "start" : 1609672620504,
+    "stop" : 1609672620504,
+    "duration" : 0
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == '请输入数字'\n  +None\n  -'请输入数字'",
+  "statusTrace" : "self = <test_cal_new.TestCalc object at 0x03D45310>, get_calc = <pythoncode.calculator.Calculator object at 0x03D45030>, get_add_datas = ['', 5, '请输入数字']\n\n    @pytest.mark.run(order=1)\n    def test_add(self, get_calc, get_add_datas):\n        result = None\n        try:\n            result = get_calc.add(get_add_datas[0], get_add_datas[1])\n            if isinstance(result, float):\n                result = round(result, 2)\n        except Exception as e:\n            print(e)\n>       assert result == get_add_datas[2]\nE       AssertionError: assert None == '请输入数字'\nE         +None\nE         -'请输入数字'\n\ntest_cal_new.py:20: AssertionError",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "get_add_datas",
+    "time" : {
+      "start" : 1609672620504,
+      "stop" : 1609672620504,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0,
+    "hasContent" : false,
+    "stepsCount" : 0
+  }, {
+    "name" : "get_calc",
+    "time" : {
+      "start" : 1609672620488,
+      "stop" : 1609672620488,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0,
+    "hasContent" : false,
+    "stepsCount" : 0
+  } ],
+  "afterStages" : [ {
+    "name" : "get_add_datas::0",
+    "time" : {
+      "start" : 1609672620535,
+      "stop" : 1609672620535,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0,
+    "hasContent" : false,
+    "stepsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "run(order=1)"
+  }, {
+    "name" : "suite",
+    "value" : "test_cal_new"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestCalc"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-IOCKJLK"
+  }, {
+    "name" : "thread",
+    "value" : "13264-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_cal_new"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "get_add_datas",
+    "value" : "['', 5, '请输入数字']"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ "run(order=1)" ]
+  },
+  "source" : "bccda6b2daec2023.json",
+  "parameterValues" : [ "['', 5, '请输入数字']" ]
+}
