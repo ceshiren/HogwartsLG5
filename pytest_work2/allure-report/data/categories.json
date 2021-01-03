@@ -1,0 +1,26 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "name" : "categories",
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert None == 'ZeroDivisionError'",
+      "children" : [ {
+        "name" : "test_div[zero]",
+        "uid" : "8fe6497498f54079",
+        "parentUid" : "abbc8d29703e0eb8893889779f8603a6",
+        "status" : "failed",
+        "time" : {
+          "start" : 1609660308654,
+          "stop" : 1609660308655,
+          "duration" : 1
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "[0, 0, 'ZeroDivisionError']" ]
+      } ],
+      "uid" : "abbc8d29703e0eb8893889779f8603a6"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ]
+}

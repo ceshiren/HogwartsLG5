@@ -1,0 +1,128 @@
+{
+  "uid" : "8fe6497498f54079",
+  "name" : "test_div[zero]",
+  "fullName" : "test_cal.TestCal#test_div",
+  "historyId" : "9de85392f5d853680024efe50df01c6e",
+  "time" : {
+    "start" : 1609660308654,
+    "stop" : 1609660308655,
+    "duration" : 1
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert None == 'ZeroDivisionError'",
+  "statusTrace" : "self = <pytest_work2.test_cal.TestCal object at 0x03BD3BB0>, get_cal = <pytest_work.calculator.Calculator object at 0x03B9E958>\nget_div_datas = [0, 0, 'ZeroDivisionError']\n\n    @pytest.mark.run(order=4)\n    def test_div(self, get_cal, get_div_datas):\n        result = None\n        try:\n            result = get_cal.div(get_div_datas[0], get_div_datas[1])\n            if isinstance(result, float):\n                result = round(result, 2)\n        except Exception as e:\n            print(e)\n>       assert result == get_div_datas[2]\nE       AssertionError: assert None == 'ZeroDivisionError'\n\ntest_cal.py:26: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "get_cal",
+    "time" : {
+      "start" : 1609660308514,
+      "stop" : 1609660308514,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  }, {
+    "name" : "get_div_datas",
+    "time" : {
+      "start" : 1609660308654,
+      "stop" : 1609660308654,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert None == 'ZeroDivisionError'",
+    "statusTrace" : "self = <pytest_work2.test_cal.TestCal object at 0x03BD3BB0>, get_cal = <pytest_work.calculator.Calculator object at 0x03B9E958>\nget_div_datas = [0, 0, 'ZeroDivisionError']\n\n    @pytest.mark.run(order=4)\n    def test_div(self, get_cal, get_div_datas):\n        result = None\n        try:\n            result = get_cal.div(get_div_datas[0], get_div_datas[1])\n            if isinstance(result, float):\n                result = round(result, 2)\n        except Exception as e:\n            print(e)\n>       assert result == get_div_datas[2]\nE       AssertionError: assert None == 'ZeroDivisionError'\n\ntest_cal.py:26: AssertionError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "a2d86313a7d01e66",
+      "name" : "stdout",
+      "source" : "a2d86313a7d01e66.txt",
+      "type" : "text/plain",
+      "size" : 43
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true
+  },
+  "afterStages" : [ {
+    "name" : "get_div_datas::0",
+    "time" : {
+      "start" : 1609660308823,
+      "stop" : 1609660308824,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "run(order=4)"
+  }, {
+    "name" : "suite",
+    "value" : "test_cal"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestCal"
+  }, {
+    "name" : "host",
+    "value" : "LAPTOP-HTBK11T2"
+  }, {
+    "name" : "thread",
+    "value" : "39196-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_cal"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "get_div_datas",
+    "value" : "[0, 0, 'ZeroDivisionError']"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ "run(order=4)" ]
+  },
+  "source" : "8fe6497498f54079.json",
+  "parameterValues" : [ "[0, 0, 'ZeroDivisionError']" ]
+}
