@@ -6,12 +6,10 @@ from selenium import webdriver
 
 class TestWeworkFuy():
     def setup(self):
-        # self.driver = webdriver.Chrome()
         chromes= webdriver.ChromeOptions()         #浏览器复用
         chromes.debugger_address= "127.0.0.1:9222"
         self.driver= webdriver.Chrome(options=chromes)
         self.driver.implicitly_wait(5)
-        # self.driver.maximize_window()
 
     def teardown(self):
         self.driver.quit()
