@@ -8,7 +8,7 @@ class TestWeworkCookie():
     def setup_method(self):
         chrome_args = webdriver.ChromeOptions()
         chrome_args.debugger_address="127.0.0.1:9222"
-        self.driver = webdriver.Chrome(options=chrome_args)
+        self.driver = webdriver.Chrome()
 
     def test_cookie(self):
         self.driver.get("https://work.weixin.qq.com/")
