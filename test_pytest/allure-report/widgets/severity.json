@@ -1,0 +1,51 @@
+[ {
+  "uid" : "cf7c4aeb8b390eb7",
+  "name" : "test_add[except]",
+  "time" : {
+    "start" : 1608991529288,
+    "stop" : 1608991529288,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "2aabc5abc9e665b6",
+  "name" : "test_add[float]",
+  "time" : {
+    "start" : 1608991529286,
+    "stop" : 1608991529286,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "daa72174edc4d199",
+  "name" : "test_add[bigint]",
+  "time" : {
+    "start" : 1608991529283,
+    "stop" : 1608991529283,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "371eaf3404cd34a4",
+  "name" : "test_add[minus]",
+  "time" : {
+    "start" : 1608991529280,
+    "stop" : 1608991529280,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "8404658fa789309f",
+  "name" : "test_add[int]",
+  "time" : {
+    "start" : 1608991529269,
+    "stop" : 1608991529269,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "severity" : "normal"
+} ]
