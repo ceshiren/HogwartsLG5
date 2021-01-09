@@ -1,4 +1,5 @@
 from base_page_selenium import Base
+from contact_page import ContactPage
 
 
 class AddDepartmentPage(Base):
@@ -13,7 +14,6 @@ class AddDepartmentPage(Base):
         self.clicks(self._click_depart_loc)  # 点击选择部门
         self.clicks(self._depart_loc)#选择具体部门
         self.clicks(self._ensure_loc)# 点确定
-        from contact_page import ContactPage
         return ContactPage(self._driver)
 
     def add_member_fail(self,depart_name):
@@ -22,7 +22,6 @@ class AddDepartmentPage(Base):
         self.clicks(self._click_depart_loc)  # 点击选择部门
         self.clicks(self._depart_loc)#选择具体部门
         self.clicks(self._ensure_loc)# 点确定
-        from contact_page import ContactPage
         return ContactPage(self._driver)
 
 if __name__ == '__main__':

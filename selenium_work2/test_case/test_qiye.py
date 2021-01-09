@@ -14,11 +14,11 @@ class TestAddMember:
         self.main.quit()
 
     def test_add_department_success(self):
-        res = self.main.goto_contact().goto_department().add_member_success('test1').get_list()
+        res = self.main.goto_department().add_member_success('test1').get_list()
         assert ' test1' in res
 
     def test_add_department_fail(self):
-        res = self.main.goto_contact().goto_department().add_member_fail('test1').get_toeast()
+        res = self.main.goto_department().add_member_fail('test1').get_toeast()
         assert '该部门已存在' == res
 
 if __name__ == '__main__':

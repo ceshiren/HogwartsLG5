@@ -1,21 +1,10 @@
 from time import sleep
-
-from add_department_page import AddDepartmentPage
 from base_page_selenium import Base
 
 
 class ContactPage(Base):
-    _add_loc = ('css selector','.member_colLeft_top_addBtn')#添加按钮
-    _add_department_loc = ('css selector','.js_create_party')#添加部门入口
     _all_depart_loc = ('xpath','//ul[@role="group" and @class="jstree-children"]//li')#所有部门的元素
     _fail_toeast_loc = ('id','js_tips')#添加部门失败toeast
-
-
-    def goto_department(self):
-        '''添加部门'''
-        self.clicks(self._add_loc)#点击添加按钮
-        self.clicks(self._add_department_loc)#点击添加部门
-        return AddDepartmentPage(self._driver)
 
     def get_list(self):
         eles = self.find_elements(self._all_depart_loc)

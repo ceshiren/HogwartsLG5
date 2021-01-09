@@ -187,20 +187,22 @@ class Base:
 
     def get_text(self, locator):
         '''获取元素的文本'''
-        _count= 0
-        max_count = 100
         try:
             elem_text = self.find_element(locator).text
             if elem_text == '':
-                _count += 1
-                print(f'寻找{_count}次')
+                self._error_count += 1
+                if self._error_count >= self._max_count:
+                    return '我是空的'  # 返回具体内容
+                print(f'寻找{self._error_count}次')
                 self.get_text(locator)
-                if _count >= max_count:
-                    return elem_text  # 返回具体内容
+            self._error_count = 0#重置
             return elem_text # 返回具体内容
         except:
             print('没有text值')
             return None  # 没值返回None
+
+    def get_count(self):
+        print(self._error_count,self._max_count)
 
     def get_loaction(self, locator):
         '''获取元素的坐标'''
