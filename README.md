@@ -19,11 +19,19 @@
 - [pytest实战作业2_接口文件](/study_work2/work2.py)
 - [pytest实战作业2_参数化文件配置](/study_work2/conftest.py)
 
-#selenium1作业
+#selenium1实战作业1
 - [底层方法二次封装](/selenium_work/page/base.py)
 - [主页元素维护](/selenium_work/page/index_page.py)
 - [测试用例](/selenium_work/test_case/test_qiye.py)
 - [cookie数据维护](/selenium_work/datas)
+
+#selenium1实战作业2
+- [底层方法二次封装](/selenium_work2/page/base_page_selenium.py)
+- [主页元素维护](/selenium_work2/page/main_page.py)
+- [通讯录元素维护](/selenium_work2/page/contact_page.py)
+- [添加通讯录元素维护](/selenium_work2/page/add_department_page.py)
+- [测试用例](/selenium_work2/test_case/test_qiye.py)
+- [cookie数据维护](/selenium_work2/datas)
 
 ## 霍格沃兹测试学院
 - [测试人论坛](https://ceshiren.com)

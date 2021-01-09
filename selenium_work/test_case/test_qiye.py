@@ -1,8 +1,7 @@
 import pytest
-from selenium_work.page.base import Base
+from selenium_work.page.base_page_selenium import Base
 from time import sleep
 from selenium_work.page.index_page import *
-
 class TestWeChat:
 
     def setup_class(self):
@@ -17,6 +16,6 @@ class TestWeChat:
         self.base.quit()
 
     def test_wx(self):
-        self.base.click(loc)#点击客户联系
+        self.base.clicks(loc)#点击客户联系
 if __name__ == '__main__':
     pytest.main(['test_qiye.py','-sq'])

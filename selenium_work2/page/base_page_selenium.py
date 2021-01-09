@@ -1,5 +1,4 @@
 import json
-
 import yaml
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -7,10 +6,15 @@ import selenium.webdriver.support.expected_conditions as EC
 from selenium.common.exceptions import *
 from selenium import webdriver
 import os
-POLL_FREQUENCY = 0.5
-TIMEOUT = 5
-class Base:
+from time import sleep
 
+POLL_FREQUENCY = 0.5
+TIMEOUT = 30
+class Base:
+    _params = {}#sendkeys动态传入
+    _black_list = [('id','image_cancle')]#弹窗黑名单
+    _error_count = 0#初始计数
+    _max_count = 10#最大计数
     def __init__(self,driver:WebDriver=None,url='',types=''):
             '''进入debug模式
            1、终端进入chrome.exe目录/已经配置环境变量
@@ -47,7 +51,7 @@ class Base:
             self._driver.get(url)
         else:pass
 
-    def write_cookie_for_json(self,path='../datas/cookie.json'):
+    def write_cookie_for_json(self,path='cookie.json'):
         '''拿到cookies写入指定的JSON文件'''
         try:
             cookies = self._driver.get_cookies()
@@ -57,7 +61,7 @@ class Base:
             print('cookies 写入JSON失败，请检查路径...')
             raise e
 
-    def add_cookie(self,path='../datas/cookie.json'):
+    def add_cookie(self,path='cookie.json'):
         '''从指定JSON读取cookies，并写入打开的浏览器页面cookie'''
         try:
             with open(path,'r',encoding='utf-8') as f:
@@ -106,43 +110,71 @@ class Base:
             print('未找到元素》》》》》》》》》》》》》》》》》》，返回None')
             return False
 
-    def find(self,by,locator=None):
+    def find(self,locator):
         '''屏蔽黑名单弹窗封装'''
-        _black_list = []
-        _error_count = 0
-        _max_count = 10
         try:
-            ele = WebDriverWait(self._driver,timeout=TIMEOUT,poll_frequency=POLL_FREQUENCY).\
-                until(lambda x : x.find_element(*by) if isinstance(by,tuple) else x.find_element(by,locator))
-            _error_count = 0
+            ele = self.find_element(locator)
+            self._error_count = 0
             return ele
         except Exception as e:
-            _error_count+=1
-            if _error_count >= _max_count:
+            self._error_count+=1
+            if self._error_count >= self._max_count:
                 raise e
-            for black in _black_list:
-                eles = self._driver.find_elements(*black)
+            for black in self._black_list:
+                eles = self.find_elements(black)
                 if len(eles) > 0:
                     eles[0].click()
-                    return self.find(by,locator)
+                    return self.find(locator)
             return e
 
-    def steps(self,path='../common/test.yaml'):
+    def send(self,locator,value):
+        '''输入内容，如果存在弹窗关闭弹窗'''
+        try:
+            self.find(locator).send_keys(value)
+            self._error_count = 0
+        except Exception as e:
+            self._error_count+=1
+            if self._error_count >= self._max_count:
+                raise e
+            for black in self._black_list:
+                eles = self.find_elements(black)
+                if len(eles) > 0:
+                    eles[0].click()
+                    return self.send(locator,value)
+            return e
+
+    def click_new(self,locator):
+        '''输入内容，如果存在弹窗关闭弹窗'''
+        try:
+            self.find(locator).click()
+            self._error_count = 0
+        except Exception as e:
+            self._error_count+=1
+            if self._error_count >= self._max_count:
+                raise e
+            for black in self._black_list:
+                eles = self.find_elements(black)
+                if len(eles) > 0:
+                    eles[0].click()
+                    return self.click_new(locator)
+            return e
+
+    def steps(self,path='../page/main.yaml'):
         '''封装数据驱动，通过关键字驱动操作'''
-        _params = {}
         with open(path, encoding='utf-8') as f:
             step_yaml:list[dict] = yaml.load(f, Loader=yaml.FullLoader)
+            print(step_yaml)
             for step in step_yaml:
                 if 'by' in step.keys():
-                    ele = self.find(step['by'],step['locator'])
+                    locator = (step['by'],step['locator'])
                 if 'action' in step.keys():
-                    if '点击' == step['action']:
-                        ele.click()
-                    if '输入' == step['action']:
+                    if 'click' == step['action']:
+                        self.click_new(locator)
+                    if 'send' == step['action']:
                         content:str = step['value']
-                        for param in _params:
-                            content = content.replace(f'{param}',_params[param])
-                        ele.send_keys(content)
+                        for param in self._params:
+                            content = content.replace(f'{param}',self._params[param])
+                        self.send(locator,content)
 
     def get_attribute(self,locator,value='value'):
         '''拿到元素的value'''
@@ -155,9 +187,17 @@ class Base:
 
     def get_text(self, locator):
         '''获取元素的文本'''
+        _count= 0
+        max_count = 100
         try:
             elem_text = self.find_element(locator).text
-            return elem_text  # 有值返回具体内容
+            if elem_text == '':
+                _count += 1
+                print(f'寻找{_count}次')
+                self.get_text(locator)
+                if _count >= max_count:
+                    return elem_text  # 返回具体内容
+            return elem_text # 返回具体内容
         except:
             print('没有text值')
             return None  # 没值返回None
@@ -182,16 +222,22 @@ class Base:
 
     def sendkeys(self,locator,text):
         '''输入内容'''
-        ele = self.find_element(locator)
-        ele.send_keys(text)
+        try:
+            ele = self.find_element(locator)
+            ele.send_keys(text)
+        except Exception as e:
+            print('未找到输入元素')
+            raise e
 
-    def click(self,locator):
+    def clicks(self,locator):
         '''点击元素'''
-        ele = self.find_element(locator)
-        if ele:
+        try:
+            ele = self.find_element(locator)
             ele.click()
-        else:
-            return False
+        except Exception as e:
+            print('未找到点击元素')
+            raise e
+
 
     def clear(self,locator):
         '''清空内容'''
