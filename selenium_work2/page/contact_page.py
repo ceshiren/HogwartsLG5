@@ -1,4 +1,3 @@
-from time import sleep
 from base_page_selenium import Base
 
 
@@ -10,13 +9,14 @@ class ContactPage(Base):
         eles = self.find_elements(self._all_depart_loc)
         depart_list = []#存放部门名称
         for depart_name in eles:
-            depart_list.append(depart_name.text)
+            depart_name = depart_name.text.strip()
+            depart_list.append(depart_name)
         return depart_list
 
-    def get_toeast(self):
-        sleep(1)
+    def get_toast(self):
         return  self.get_text(self._fail_toeast_loc)#获取toeast信息
 
 if __name__ == '__main__':
     contact = ContactPage(types='debug')
-    print(contact.get_list())
+    print(contact.is_displayed(contact._fail_toeast_loc))
+    print(contact.set_display(contact._fail_toeast_loc,'block'))

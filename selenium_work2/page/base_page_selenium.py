@@ -5,8 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 import selenium.webdriver.support.expected_conditions as EC
 from selenium.common.exceptions import *
 from selenium import webdriver
-import os
-from time import sleep
 
 POLL_FREQUENCY = 0.5
 TIMEOUT = 30
@@ -14,7 +12,7 @@ class Base:
     _params = {}#sendkeys动态传入
     _black_list = [('id','image_cancle')]#弹窗黑名单
     _error_count = 0#初始计数
-    _max_count = 10#最大计数
+    _max_count = 20#最大计数
     def __init__(self,driver:WebDriver=None,url='',types=''):
             '''进入debug模式
            1、终端进入chrome.exe目录/已经配置环境变量
@@ -187,21 +185,16 @@ class Base:
 
     def get_text(self, locator):
         '''获取元素的文本'''
+        ele = self.find_element(locator)
         try:
-            elem_text = self.find_element(locator).text
-            if elem_text == '':
-                self._error_count += 1
-                if self._error_count >= self._max_count:
-                    return '我是空的'  # 返回具体内容
-                print(f'寻找{self._error_count}次')
-                self.get_text(locator)
-            self._error_count = 0#重置
-            return elem_text # 返回具体内容
+            if ele.is_displayed():#元素可见
+                return ele.text
+            self.get_text(locator)
         except:
-            print('没有text值')
-            return None  # 没值返回None
+            return False  # 没值返回None
 
     def get_count(self):
+        '''打印计数器'''
         print(self._error_count,self._max_count)
 
     def get_loaction(self, locator):
@@ -456,4 +449,29 @@ class Base:
             return  self._driver.swipe(start_x, start_y, end_x, end_y, duration)
         else:
             print('元素未出现，无法进行滑动')
+            return False
+
+    def set_display(self,locator,types):
+        '''
+        修改display属性
+        :param eleId:元素ID的值
+        :param types:none,block,inline
+        :return:
+        '''
+        if self.find_element(locator):
+            self._driver.execute_script(f"document.getElementById('{locator[1]}').style.display='{types}'")
+            return self._driver.execute_script(f"return document.getElementById('{locator[1]}').style.display")
+        else:
+            return False
+
+    def get_display(self,locator):
+        '''
+        修改display属性
+        :param eleId:元素ID的值
+        :param types:none,block,inline
+        :return:
+        '''
+        if self.find_element(locator):
+            return self._driver.execute_script(f"return document.getElementById('{locator[1]}').style.display")
+        else:
             return False

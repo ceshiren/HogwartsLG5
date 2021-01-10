@@ -1,3 +1,4 @@
+from time import sleep
 
 import pytest
 from selenium_work2.page.main_page import MainPage
@@ -15,10 +16,10 @@ class TestAddMember:
 
     def test_add_department_success(self):
         res = self.main.goto_department().add_member_success('test1').get_list()
-        assert ' test1' in res
+        assert 'test1' in res
 
     def test_add_department_fail(self):
-        res = self.main.goto_department().add_member_fail('test1').get_toeast()
+        res = self.main.goto_department().add_member_fail('test1').get_toast()
         assert '该部门已存在' == res
 
 if __name__ == '__main__':

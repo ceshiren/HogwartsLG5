@@ -1,7 +1,6 @@
 from base_page_selenium import Base
 from contact_page import ContactPage
 
-
 class AddDepartmentPage(Base):
     _depart_name_loc = ('css selector','.member_tag_dialog_inputDlg div:nth-child(1) input')#部门名称
     _click_depart_loc = ('css selector','.js_parent_party_name')#部门下拉
@@ -25,5 +24,5 @@ class AddDepartmentPage(Base):
         return ContactPage(self._driver)
 
 if __name__ == '__main__':
-    contact = AddDepartmentPage(url='https://work.weixin.qq.com/wework_admin/frame#contacts',types='debug')
-    print(contact.get_list())
+    contact = AddDepartmentPage(types='debug')
+    print(f"获取toast:{contact.add_member_fail('test1').get_toast()}:值")#注意判断display值
