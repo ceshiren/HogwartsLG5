@@ -1,6 +1,6 @@
 from typing import List
 
-from test_python.src.log import log
+from test_python.src.tests.log import log
 
 
 def log_decorator(func):

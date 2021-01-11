@@ -1,7 +1,7 @@
 import unittest
 from unittest import TestCase
 
-from test_python.src.hero_factory import HeroFactory
+from test_python.src.tests.hero_factory import HeroFactory
 
 
 class TestHero(TestCase):

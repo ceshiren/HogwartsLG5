@@ -1,4 +1,4 @@
-from test_python.src.hero import Hero
+from test_python.src.tests.hero import Hero
 
 
 class ChengYaoJin(Hero):

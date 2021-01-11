@@ -1,7 +1,7 @@
-from test_python.src.chengyaojin import ChengYaoJin
-from test_python.src.hero import Hero
-from test_python.src.libai import LiBai
-from test_python.src.log import log
+from test_python.src.tests.chengyaojin import ChengYaoJin
+from test_python.src.tests.hero import Hero
+from test_python.src.tests.libai import LiBai
+from test_python.src.tests.log import log
 
 
 class HeroFactory:
