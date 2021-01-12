@@ -1,0 +1,4 @@
+-
+  by: xpath
+  locator: //*[@class="android.widget.LinearLayout"]//android.widget.TextView[@text="手动输入添加"]
+  action: click

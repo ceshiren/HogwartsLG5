@@ -1,6 +1,14 @@
 ## 霍格沃兹测试学院拉勾名企直推营第五期演练作品
 
 ## 作业列表
+#appium实战作业1
+- [底层方法二次封装](/apppium_work1/page/base_page.py)
+- [页面方法维护目录](/apppium_work1/page)
+- [页面数据驱动目录](/apppium_work1/page)
+- [启动APP配置驱动](/apppium_work1/config/app.yaml)
+- [启动APP配置文件](/apppium_work1/page/app.py)
+- [测试用例](/apppium_work1/testcase/test_add_member.py)
+
 #pytest实战1
 - [python脚本作业](/test_git/git_demo.py)
 - [pytest实战作业1_测试用例文件](/study_work/test_work1.py)

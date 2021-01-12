@@ -1,0 +1,4 @@
+-
+  by: xpath
+  locator: //*[@resource-id="com.tencent.wework:id/ilb" ]//android.widget.TextView[@text="添加成员"]
+  action: click

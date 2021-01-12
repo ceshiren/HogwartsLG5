@@ -1,0 +1,4 @@
+-
+  by: xpath
+  locator: //*[@resource-id="com.tencent.wework:id/elq" and @text="通讯录"]
+  action: click
