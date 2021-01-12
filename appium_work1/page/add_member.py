@@ -7,6 +7,4 @@ class AddMember(BasePage):
         self._params['{name}'] = name
         self._params['{phone}'] = phone
         self.steps('../page/add_member.yaml')
-        print('添加成功')
         return True
-

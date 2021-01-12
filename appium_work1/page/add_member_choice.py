@@ -5,9 +5,7 @@ class AddMemberChoice(BasePage):
 
     def manual_add_member(self):
         '''点击手动添加成员'''
-        print('开始点击手动添加成员')
         self.steps('../page/addmemberchoice_goto_add_member.yaml')
-        print('点击手动添加成员')
         return AddMember(self._driver)
 
     def back(self):

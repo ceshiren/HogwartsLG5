@@ -6,7 +6,6 @@ class Contact(BasePage):
     def goto_add_member(self):
         '''点击添加成员'''
         self.steps('../page/contact_goto_add_member.yaml')
-        print('点击添加成员')
         return AddMemberChoice(self._driver)
 
     def get_member_list(self):

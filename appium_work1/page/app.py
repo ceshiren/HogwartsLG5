@@ -7,10 +7,10 @@ from appium_work1.page.main import Main
 class App(BasePage):
 
     def start(self,path='../config/app.yaml'):
+        '''判断driver是否有值，有则加载报名，无则启动driver，返回对象本身'''
         res = self.open_yaml(path)
         if self._driver == None:
             try:
-                print('无driver，启动driver')
                 capability_conf = {}
                 capability_conf['platformName'] = res['platformName']
                 capability_conf['deviceName'] = res['deviceName']
@@ -27,7 +27,6 @@ class App(BasePage):
             except Exception as e:
                 raise e
         else:
-            print('有driver,加载包名')
             self._driver.start_activity(res['appPackage'], res['appActivity'])
         return self
 
