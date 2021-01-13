@@ -7,6 +7,9 @@
 - [pytest第二次作业allure报告](/homework/resources/allure%20screenshot.png)
 - [selenium第一次作业](/homework/testing/test_weixin_login.py)
 - [selenium第二次作业](/homework/weixin)
+- [appium第一次作业](/homework/testing/test_add_contact.py)
+
+
 
 ## 霍格沃兹测试学院
 - [测试人论坛](https://ceshiren.com)
