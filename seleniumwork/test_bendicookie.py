@@ -13,7 +13,7 @@ class TestWeworkCookie():
 
     def test_cookie(self):
         self.driver.get("https://work.weixin.qq.com/")
-        with open("cookie.json","r") as i:
+        with open("cookie.json", "r") as i:
             cookies = json.load(i)
         for cookie in cookies:
             self.driver.add_cookie(cookie)
