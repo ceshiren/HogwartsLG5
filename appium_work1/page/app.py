@@ -1,7 +1,7 @@
 import yaml
 from appium import webdriver
 from base_page import BasePage
-from appium_work1.page.main import Main
+from appium_work1.page.main_page import Main
 
 
 class App(BasePage):
@@ -28,6 +28,17 @@ class App(BasePage):
                 raise e
         else:
             self._driver.start_activity(res['appPackage'], res['appActivity'])
+        return self
+
+    def stop(self):
+        '''关闭APP'''
+        self._driver.quit()
+        return self
+
+    def restart(self):
+        '''重启APP'''
+        self._driver.quit()
+        self._driver.launch_app()
         return self
 
     def main(self)->Main:

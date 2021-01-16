@@ -1,5 +1,6 @@
 import json
 import yaml
+from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 import selenium.webdriver.support.expected_conditions as EC
@@ -61,6 +62,15 @@ class BasePage:
         elem = WebDriverWait(self._driver,timeout=TIMEOUT,poll_frequency=POLL_FREQUENCY).until(lambda x : x\
                 .find_element_by_android_uiautomator('new UiSelector().'+key+'("'+value+'")'))
         return elem
+
+    def scroll_find_element(self,text):
+        '''app滚动查找元素'''
+        element = (MobileBy.ANDROID_UIAUTOMATOR,
+                   'new UiScrollable(new UiSelector().'
+                   'scrollable(true).instance(0)).'
+                   'scrollIntoView(new UiSelector().'
+                   f'text("{text}").instance(0));')
+        self.find_and_click(element)
 
     def find_element(self,locator):
         '''
@@ -159,6 +169,9 @@ class BasePage:
                         for param in self._params:
                             content = content.replace(f'{param}',self._params[param])
                         self.send(locator,content)
+                else:
+                    print('不存在操作，返回元素对象本身')
+                    return  self.find(locator)
 
     def get_attribute(self,locator,value='value'):
         '''拿到元素的value'''

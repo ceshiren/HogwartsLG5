@@ -1,0 +1,3 @@
+-
+  by: xpath
+  locator: //*[@class="android.widget.Toast"]

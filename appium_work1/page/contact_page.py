@@ -1,5 +1,5 @@
 from base_page import BasePage
-from add_member_choice import AddMemberChoice
+from add_member_choice_page import AddMemberChoice
 
 class Contact(BasePage):
     _member_list_loc = ('xpath','//*[@resource-id="com.tencent.wework:id/ilb" ]//android.widget.TextView')

@@ -1,5 +1,5 @@
 from base_page import BasePage
-from add_member import AddMember
+from add_member_page import AddMember
 
 class AddMemberChoice(BasePage):
 
@@ -8,7 +8,6 @@ class AddMemberChoice(BasePage):
         self.steps('../page/addmemberchoice_goto_add_member.yaml')
         return AddMember(self._driver)
 
-    def back(self):
-        '''点击返回'''
-        self.steps('../page/addmemberchoice_back.yaml')
-        pass
+    def add_member_toeast(self):
+        '''返回toeast'''
+        return self.steps('../page/add_member_toeast.yaml').text

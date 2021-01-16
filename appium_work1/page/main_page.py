@@ -1,5 +1,5 @@
 from base_page import BasePage
-from contact import Contact
+from appium_work1.page.contact_page import Contact
 
 class Main(BasePage):
 
