@@ -11,6 +11,7 @@ from selenium.webdriver.common.keys import Keys
 class TestTestbaidu():
     def setup_method(self):
         chrome_args = webdriver.ChromeOptions()
+        chrome_args.binary_location = "D:\chrome\Google\Chrome\Application\chrome.exe"
         chrome_args.debugger_address = "127.0.0.1:9222"
         self.driver = webdriver.Chrome(options=chrome_args)
 
