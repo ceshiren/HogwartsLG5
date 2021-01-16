@@ -1,1 +1,16 @@
+action==1.4.4
+Appium-Python-Client==1.0.2
+atomicwrites==1.4.0
+attrs==20.3.0
+basepage==1.7.3
+colorama==0.4.4
+iniconfig==1.1.1
+packaging==20.8
+pluggy==0.13.1
+py==1.10.0
+pyparsing==2.4.7
+pytest==6.2.1
 PyYAML==5.3.1
+selenium==3.141.0
+toml==0.10.2
+urllib3==1.26.2
