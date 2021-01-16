@@ -1,7 +1,7 @@
 ## 霍格沃兹测试学院拉勾名企直推营第五期演练作品
 
 ## 作业列表
-#appium实战作业1
+#appium实战作业1和2
 - [底层方法二次封装](/appium_work1/page/base_page.py)
 - [页面方法维护目录](/appium_work1/page)
 - [页面数据驱动目录](/appium_work1/page)
