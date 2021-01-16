@@ -12,10 +12,12 @@ def read_datas():
         datas = yaml.safe_load(f)
         print(datas)
         # 获取文件的datas数据
-        get_datas = datas["datas"]
+        add_datas = datas["add_data"]
+        sub_datas = datas["sub_data"]
+        mul_datas = datas["mul_data"]
+        div_datas = datas["div_data"]
         # 获取文件的myids文件
-        get_ids = datas["myids"]
-        return [get_datas, get_ids]
+        return [add_datas, sub_datas, mul_datas, div_datas]
 
 
 def is_number(s):
@@ -44,27 +46,29 @@ def teardown_method():
 
 
 class TestCal:
-    def setups(self):
+    def setup_class(self):
         # 实例化类，生成类的参数
         self.cal = Calculator()
 
-    # 使用参数化
-    @pytest.mark.parametrize("a,b,expect", read_datas()[0], ids=read_datas()[1])
+    @pytest.mark.parametrize("a,b,expect", read_datas()[0])
     def test_add(self, a, b, expect):
         if is_number(a) & is_number(b):
             result1 = self.cal.add(a, b)
             assert fabs(result1 - expect) < 0.0001
 
+    @pytest.mark.parametrize("a,b,expect", read_datas()[1])
     def test_sub(self, a, b, expect):
         if is_number(a) & is_number(b):
             result2 = self.cal.sub(a, b)
             assert fabs(result2 - expect) < 0.0001
 
+    @pytest.mark.parametrize("a,b,expect", read_datas()[2])
     def test_mul(self, a, b, expect):
         if is_number(a) & is_number(b):
             result3 = self.cal.mul(a, b)
-            assert fabs(result3- expect) < 0.0001
+            assert fabs(result3 - expect) < 0.0001
 
+    @pytest.mark.parametrize("a,b,expect", read_datas()[3])
     def test_div(self, a, b, expect):
         if is_number(a) & is_number(b):
             if b != 0:
