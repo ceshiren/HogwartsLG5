@@ -27,5 +27,5 @@ class TestLogin:
             self.driver.add_cookie(cookie)
         # 注入后，重新打开登录后的页面
         self.driver.get("https://work.weixin.qq.com/wework_admin/frame")
-        self.driver.find_element_by_id("menu_contacts").click()
+        self.driver.find_element_by_id("menu_customer").click()
         sleep(3)
