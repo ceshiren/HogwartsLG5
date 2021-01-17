@@ -8,9 +8,11 @@ from selenium.webdriver.common.by import By
 class TestWork():
     def setup_method(self):
         # chrome --remote-debugging-port=9222，打开前关闭所有的Google浏览器
-        # chrome_args = webdriver.ChromeOptions()
-        # chrome_args.debugger_address = "127.0.0.1:9222"
-        # self.driver = webdriver.Chrome(options=chrome_args)
+        #使用cookie和复用浏览器
+        chrome_args = webdriver.ChromeOptions()
+        chrome_args.debugger_address = "127.0.0.1:9222"
+        self.driver = webdriver.Chrome(options=chrome_args)
+
         self.driver = webdriver.Chrome()
     def teardown_method(self):
         self.driver.quit()
@@ -33,7 +35,7 @@ class TestWork():
         for cookie in cookies:
             self.driver.add_cookie(cookie)
         self.driver.get("https://work.weixin.qq.com/wework_admin/frame#index")
-        sleep(15)
+        sleep(10)
         self.driver.find_element(By.XPATH, '//*[@id="menu_customer"]/span').click()
         sleep(2)
 
