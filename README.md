@@ -8,6 +8,7 @@
 - [selenium第一次作业](/homework/testing/test_weixin_login.py)
 - [selenium第二次作业](/homework/weixin)
 - [appium第一次作业](/homework/testing/test_add_contact.py)
+- [appium第二次作业](/homework/appium_po)
 
 
 
