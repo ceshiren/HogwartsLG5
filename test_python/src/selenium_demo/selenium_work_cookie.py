@@ -17,15 +17,14 @@ class Testweixin():
         print("设置完成")
     # def teardown_method(self):
     #     self.driver.quit()
-
+    def test_getcookie(self):
+        cookies = self.driver.get_cookies()
+        # 以文件流的形式打开文件
+        with open("cookie.json", "w") as f:
+        # 存储 cookie 到 cookie.json
+            json.dump(cookies, f)
+        f.close()
     def test_cookie(self):
-        # 获取  cookie
-        # cookies = self.driver.get_cookies()
-        # # 以文件流的形式打开文件
-        # with open("cookie.json", "w") as f:
-        # # 存储 cookie 到 cookie.json
-        #     json.dump(cookies, f)
-        # f.close()
         self.driver.get("https://work.weixin.qq.com/wework_admin/frame")
         print("get cookies")
 
@@ -43,7 +42,12 @@ class Testweixin():
         sleep(3)
         self.driver.find_element(By.XPATH, "//*[@id='menu_contacts']").click()
 
+    def test_testweixin(self):
+        self.driver.get("https://work.weixin.qq.com/wework_admin/frame#index")
+        sleep(3)
+        self.driver.find_element(By.XPATH, "//*[@id='menu_contacts']").click()
+        self.driver.find_element(By.XPATH, '//*[@id="menu_customer"]').click()
     def teardown_method(self):
         self.driver.quit()
 if __name__=="__main__":
-    pytest.main([])
+    pytest.main([r"C:\Users\Dmall-CD-Tech01\PycharmProjects\HogwartsLG5\test_python\src\selenium_demo\selenium_work.py"])
