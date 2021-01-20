@@ -1,6 +1,14 @@
 ## 霍格沃兹测试学院拉勾名企直推营第五期演练作品
 
 ## 作业列表
+#appium框架作业1
+- [底层方法二次封装](/appium_work2/page/base_page.py)
+- [黑名单装饰器](/appium_work2/black_handle.py)
+- [PO维护目录](/appium_work2/page)
+- [启动APP配置驱动](/appium_work2/config/app.yaml)
+- [启动APP配置文件](/appium_work2/page/app.py)
+- [测试用例](/appium_work2/testcase/test_search.py)
+
 #appium实战作业1和2
 - [底层方法二次封装](/appium_work1/page/base_page.py)
 - [页面方法维护目录](/appium_work1/page)
