@@ -7,6 +7,7 @@
 - [企业微信web自动化实战第一次作业](/selenium_test)
 - [企业微信web自动化实战第二次作业](/selenium_PO)
 - [企业微信app自动化实战第一次作业](/appium_work1)
+- [企业微信app自动化实战第二次作业](/appium_work2)
 
 ## 霍格沃兹测试学院
 - [测试人论坛](https://ceshiren.com)
