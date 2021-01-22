@@ -11,3 +11,5 @@ class MainPage(BasePage):
         self.driver.find_element(By.XPATH, "//*[@id='menu_contacts']").click()
         sleep(1)
         return ContactPage(self.driver)
+    def quit(self):
+        self.driver.quit()

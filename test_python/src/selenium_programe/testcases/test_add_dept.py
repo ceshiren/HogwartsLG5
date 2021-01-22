@@ -22,3 +22,5 @@ class TestAddMember():
     #     self.main.
     #class ="jstree-node js_editable jstree-last jstree-open"
     #     assert "崔丝塔娜" not in result
+    def teardown_class(self):
+        self.main.quit()
