@@ -1,0 +1,3 @@
+goto_search:
+  - action: click
+    locator: [id,"com.xueqiu.android:id/action_search"]
