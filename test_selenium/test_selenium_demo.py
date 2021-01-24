@@ -16,12 +16,12 @@ class TestTestbaidu():
     #     self.driver.quit()
 
     def test_cookie(self):
-        # 获取  cookie
-        # cookies = self.driver.get_cookies()
-        # 以文件流的形式打开文件
-        # with open("cookie.json", "w") as f:
-            # 存储 cookie 到 cookie.json
-        #     json.dump(cookies, f)
+
+        cookies = self.driver.get_cookies()
+
+        with open("cookie.json", "w") as f:
+
+            json.dump(cookies, f)
 
         self.driver.get("https://work.weixin.qq.com/")
         # 以文件流的形式打开文件
