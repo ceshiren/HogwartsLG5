@@ -1,0 +1,7 @@
+search:
+  - action: find_and_send
+    locator: [id, 'search_input_text']
+    value: "京东"
+
+  - action: find_and_click
+    locator: [xpath, '//*[@text="京东集团-SW"]']
