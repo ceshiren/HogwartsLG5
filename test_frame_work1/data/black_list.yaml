@@ -1,0 +1,5 @@
+- - xpath
+  - "//*[@resource-id='com.xueqiu.android:id/iv_close']"
+
+- - xpath
+  - "//*[@resource-id='com.xueqiu.android:id/ib_close']"
