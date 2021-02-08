@@ -1,0 +1,5 @@
+登录操作
+获取token
+username and password:['xiulanyue', '123456', 'qdfdsfgg']
+我是第一条测试用例
+退出登录操作
