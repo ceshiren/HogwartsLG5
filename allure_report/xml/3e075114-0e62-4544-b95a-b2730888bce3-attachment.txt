@@ -1,3 +1,0 @@
-INFO     root:conftest.py:44 结束sub计算***************************
-INFO     root:conftest.py:41 开始sub计算***************************
-INFO     root:test_work2.py:27 计算正确:计算得出1,比较值1

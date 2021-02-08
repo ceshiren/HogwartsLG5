@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 from selenium_work2.page.main_page import MainPage
 

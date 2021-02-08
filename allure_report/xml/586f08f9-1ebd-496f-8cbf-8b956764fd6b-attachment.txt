@@ -1,3 +1,0 @@
-INFO     root:conftest.py:28 结束add计算***************************
-INFO     root:conftest.py:25 开始add计算***************************
-INFO     root:test_work2.py:13 计算正确:计算得出9,比较值9

@@ -2,7 +2,7 @@
 from test_python.src.log import *
 def logs(func):
     def wrapper(*args,**kwargs):
-        log.debug(f'{logs.__name__}--->{func.__name__}')
+        log.debug(f'{log.__name__}--->{func.__name__}')
         log.debug(f'打印log的func返回：{func(*args,**kwargs)}')
         return  func(*args,**kwargs)
     log.debug(f'打印装饰器主方法返回的值：{wrapper}')

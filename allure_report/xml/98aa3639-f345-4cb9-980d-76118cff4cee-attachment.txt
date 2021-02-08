@@ -1,2 +1,0 @@
-INFO     root:conftest.py:33 开始divi计算***************************
-INFO     root:test_work2.py:20 计算正确:计算得出0.5,比较值0.5

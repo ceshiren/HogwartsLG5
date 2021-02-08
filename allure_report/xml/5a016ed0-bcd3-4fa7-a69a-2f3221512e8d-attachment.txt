@@ -1,3 +1,0 @@
-INFO     root:conftest.py:52 结束mul计算***************************
-INFO     root:conftest.py:49 开始mul计算***************************
-INFO     root:test_work2.py:34 计算正确:计算得出20,比较值20
