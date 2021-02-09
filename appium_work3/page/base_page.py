@@ -11,9 +11,6 @@ POLL_FREQUENCY = 0.5
 TIMEOUT = 5
 class BasePage:
     _params = {}#sendkeys动态传入
-    _black_list = [('id','com.xueqiu.android:id/iv_close')]#弹窗黑名单
-    _error_count = 0#初始计数
-    _max_count = 10#最大计数
     _driver = WebDriver
     def __init__(self,driver:WebDriver=None):
         self._driver = driver
@@ -180,7 +177,7 @@ class BasePage:
 
     def open_yaml(self,path):
         with open(path, encoding='utf-8') as f:
-            return yaml.load(f, Loader=yaml.FullLoader)
+            return yaml.safe_load(f)
 
     def steps(self,path,options):
         '''封装数据驱动，通过关键字驱动操作'''
