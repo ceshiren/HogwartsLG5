@@ -32,3 +32,5 @@ class TestEnterpriseWeChat(WechatCom):
         self.driver.find_element_by_xpath('//*[@id=\"indexTop\"]/div[2]/aside/a[1]').click()
         self.driver.find_element(By.ID, "menu_customer").click()
         sleep(5)
+
+
