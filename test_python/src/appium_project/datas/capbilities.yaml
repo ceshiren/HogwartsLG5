@@ -1,0 +1,9 @@
+platformName: Android
+platformVersion: 5.1.1
+deviceName: 127.0.0.1:21503
+appPackage: com.tencent.wework
+appActivity: com.tencent.wework.launch.LaunchSplashActivity
+noReset: true
+automationName: uiautomator2
+ip: 127.0.0.1
+port: 4723
