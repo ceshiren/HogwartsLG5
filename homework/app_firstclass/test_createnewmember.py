@@ -12,11 +12,14 @@ class Test_CreateNewMember:
         caps["deviceName"] = "127.0.0.1:7555"
         caps["appPackage"] = "com.tencent.wework"
         caps["appActivity"] = ".launch.WwMainActivity"
+        # 不清空本地缓存，启动app
         caps["noReset"] = "true"
         caps["unicodeKeyBoard"] = "true"
         caps["resetKeyBoard"] = "true"
         caps["ensureWebviewsHavePages"] = True
+        # 不关闭app
         caps["dontStopAppOnReset"] = "true"
+        # 设置页面等待空闲状态的时间为0秒
         caps['settings[waitForIdleTimeout]'] = 0
 
         self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", caps)
@@ -71,4 +74,3 @@ class Test_CreateNewMember:
         # 判断成员是否添加成功
         ele = self.driver.find_element_by_xpath("//*[@class='android.widget.Toast']").text
         assert ele == "添加成功"
-
