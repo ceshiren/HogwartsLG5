@@ -3,8 +3,8 @@ import sys
 
 import yaml
 from appium import webdriver
-from test_python.src.appium_project.pages.base_page import BasePage
-from test_python.src.appium_project.pages.main_page import MainPage
+from test_python.src.appium_frame.pages.base_page import BasePage
+from test_python.src.appium_frame.pages.main_page import MainPage
 
 
 class AppPage(BasePage):
@@ -18,11 +18,11 @@ class AppPage(BasePage):
     def read_capbilities(self):
         path = os.path.dirname(__file__).strip("pages").__add__("datas/capbilities.yaml")
         print(path)
-        with open(path, 'r',encoding="utf-8") as f:
+        with open(path, 'r') as f:
             data = yaml.load(f)
 
             desired_caps = {'platformName': data['platformName'], 'platformVersion': data['platformVersion'],
-                            'deviceName': data['deviceName'], 'appPackage': data['appPackage'],
+                            'deviceName': data['deviceName'],  'appPackage': data['appPackage'],
                             'appActivity': data['appActivity'], 'noReset': data['noReset'],
                             'automationName': data['automationName']}
 
