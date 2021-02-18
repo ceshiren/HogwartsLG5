@@ -1,16 +1,10 @@
+import os
+
 import pytest
 import yaml
 
 from test_python.src.appium_project.pages.app_page import AppPage
-
-
-def get_data():
-    with open('../data/data.yaml',encoding="UTF-8") as f:
-        data = yaml.safe_load(f)
-        add_data = data['add']
-        return add_data
-
-
+from test_python.src.appium_project.common.Common_Funcs import Common_Funcs
 class TestContact:
     def setup(self):
         self.app = AppPage()
@@ -19,14 +13,12 @@ class TestContact:
     def teardown(self):
         self.app.stop()
 
-    @pytest.mark.parametrize("name,gender,phonenum",get_data())
+    @pytest.mark.parametrize("name,gender,phonenum",Common_Funcs().get_data()[0],ids=Common_Funcs().get_data()[1])
     def test_add_contact(self,name,gender,phonenum):
         # name = "zhangsi2"
         # gender = '男'
         # phonenum = '13300000002'
-        toast = self.main.click_addresslist().add_member().addconect_menual().\
-            edit_name(name).edit_gender(gender).edit_phonenum(phonenum).click_save().get_toast()
+        toast = self.main.goto_cantact().goto_addmember().add_member_manually().\
+            edit_name(name).edit_gender(gender).edit_phonenum(phonenum).messageConfirm().get_toast()
         assert toast == "添加成功"
 
-if __name__ == '__main__':
-    print(get_data()['add'])

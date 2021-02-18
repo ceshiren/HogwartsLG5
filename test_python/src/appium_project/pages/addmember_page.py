@@ -5,6 +5,10 @@ from test_python.src.appium_project.pages.memberedit_page import MemberEditPage
 
 
 class AddMemberPage(BasePage):
-    def goto_memberedit(self):
-
+    def add_member_manually(self):
+        self.driver.find_element(MobileBy.XPATH, "//*[@text='手动输入添加']").click()
         return MemberEditPage(self.driver)
+
+    def get_toast(self):
+        toast = self.driver.find_element(MobileBy.XPATH, '//*[contains(@text, "添加成功")]').text
+        return toast
