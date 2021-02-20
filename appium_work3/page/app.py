@@ -62,6 +62,7 @@ class App(BasePage):
         return self
 
     def start_port_sync(self):
+        '''后台启动两个appium服务端口'''
         desired_process_list = []
         for i in range(len(self.res_yaml['udid'])):
             port = 4723 + 2*i
@@ -74,7 +75,7 @@ class App(BasePage):
 
 
     def start_port(self,host,port):
-        '''后台创建服务，else未占用进行创建'''
+        '''后台创建appium服务，else未占用进行创建'''
         if self.check_port(host,port):
             return False
         else:
