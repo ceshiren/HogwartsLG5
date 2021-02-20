@@ -3,6 +3,9 @@ import sys
 
 import yaml
 from appium import webdriver
+from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.touch_action import TouchAction
+
 from test_python.src.appium_frame.pages.base_page import BasePage
 from test_python.src.appium_frame.pages.main_page import MainPage
 
@@ -40,5 +43,5 @@ class AppPage(BasePage):
         return self
 
     def goto_main(self) -> MainPage:
-
+        self.find((MobileBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/post_status']")).click()
         return MainPage(self.driver)

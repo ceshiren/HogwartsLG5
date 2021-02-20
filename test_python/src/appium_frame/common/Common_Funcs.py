@@ -4,7 +4,7 @@ import yaml
 
 
 class Common_Funcs:
-    path = os.path.dirname(__file__).strip("common").__add__("datas/data.yml")
+    path = os.path.dirname(__file__).strip("common").__add__("datas/data.yaml")
 
     def get_data(self):
         print(self.path)

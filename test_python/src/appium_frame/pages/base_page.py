@@ -9,7 +9,7 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def find_and_click(self, locator):
-        self.find(locator).click()
+        self.find(*locator).click()
 
     def scroll_find_click(self, text):
         element = (MobileBy.ANDROID_UIAUTOMATOR,
