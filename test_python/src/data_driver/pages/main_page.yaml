@@ -1,0 +1,7 @@
+goto_market:
+  - action: find_and_click
+    locator: [xpath, "//*[@text='行情']"]
+
+goto_mine:
+  - action: find_and_click
+    locator: [xpath, "//*[@text='我的']"]

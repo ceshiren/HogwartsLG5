@@ -4,8 +4,8 @@ import yaml
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
 
-from test_python.src.appium_frame.base_page import BasePage
-from test_python.src.appium_frame.pages.main_page import MainPage
+from test_python.src.data_driver.base_page import BasePage
+from test_python.src.data_driver.pages.main_page import MainPage
 
 
 class AppPage(BasePage):

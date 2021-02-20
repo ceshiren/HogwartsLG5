@@ -18,9 +18,9 @@ def black_list(fun):
                 eles = instance.driver.find_elements(*black)
                 # 对黑名单元素进行处理
                 if len(eles) > 0:
-                    for i in range(0, len(eles)):
+                    for ele in eles:
                         # 通过点击的方式，关闭弹窗
-                        eles[i].click()
+                        ele.click()
                         # 再次查找
                         try:
                             return fun(*args, **kwargs)
