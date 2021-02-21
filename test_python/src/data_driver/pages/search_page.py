@@ -3,4 +3,5 @@ from test_python.src.data_driver.base_page import BasePage
 
 class SearchPage(BasePage):
     def search_stocks(self):
-        return self
+        self.run_steps("./search_page.yaml","search_stocks")
+        return True

@@ -9,6 +9,6 @@ class TestContact:
         self.app.stop()
 
     def test_blacker(self):
-        toast = self.app.start().goto_main().goto_market()
-        assert toast
+        result = self.app.start().goto_main().goto_market().goto_search().search_stocks()
+        assert result
 
