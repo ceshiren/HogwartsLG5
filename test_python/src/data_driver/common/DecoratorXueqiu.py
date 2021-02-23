@@ -8,7 +8,7 @@ def black_list(fun):
         instance = args[0]
         path = os.path.dirname(__file__).strip("common").__add__("datas/blacklist.yaml")
         with open(path, 'r', encoding="utf-8") as f:
-            blacks = yaml.load(f)
+            blacks = yaml.safe_load(f)
         # print("yaml 测试"+str(blacks))
 
         try:
