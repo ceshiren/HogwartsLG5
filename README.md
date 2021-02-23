@@ -11,6 +11,7 @@
 - [appium第二次作业](/homework/appium_po)
 - [打造自己的测试框架作业一](/homework/test_framework)
 - [打造自己的测试框架作业二](/homework/test_framework_yaml)
+- [企业微信接口测试作业一](/homework/test_requests)
 
 
 
