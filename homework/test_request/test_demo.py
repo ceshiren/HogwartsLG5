@@ -2,8 +2,9 @@ import requests
 
 class TestApi:
     def setup_class(self):
-        corpid = "wwa8c3f49624d81cd9"
-        corpsecret = "NNdFue-cBIv0l5m60EvwcY22syS9Yv5ONHhhHjWo3hk"
+        # 防止隐私信息泄露，用任意字符代替
+        corpid = "aaaaa"
+        corpsecret = "bbbbb"
         url = f"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={corpid}&corpsecret={corpsecret}"
         r = requests.get(url)
         self.token = r.json()["access_token"]
