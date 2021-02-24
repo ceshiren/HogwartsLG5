@@ -54,11 +54,12 @@ class TestApi:
                 "userid": userid,
                 "name": "shenshenshen123",
                 "mobile" : "12345678897",
-                "department" : "1"
+                "department" : [1]
             },
             "encoding": "base64"
         }
         self.res = Api().send(req_data).json()  # 添加成员信息成员信息
+        pytest.assume(self.res['errmsg'] == 'created')
 
     def test_del_member(self):
         userid = "Shen2"
