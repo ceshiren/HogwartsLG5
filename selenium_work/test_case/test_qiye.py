@@ -5,8 +5,8 @@ from selenium_work.page.index_page import *
 class TestWeChat:
 
     def setup_class(self):
-        # self.base = Base(types='debug')#走debug模式
-        # self.base.write_cookie_for_json()#debug模式下进行写入cookie
+        # self.common = Base(types='debug')#走debug模式
+        # self.common.write_cookie_for_json()#debug模式下进行写入cookie
         self.base = Base(url=url)#走非debug模式
         self.base.add_cookie()  # 浏览器读取cookies
         self.base.refresh()

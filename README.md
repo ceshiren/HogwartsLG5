@@ -1,6 +1,11 @@
 ## 霍格沃兹测试学院拉勾名企直推营第五期演练作品
 
 ## 作业列表
+#接口实战作业1
+- [request接口封装](/requests_work1/common/base.py)
+- [环境配置yml](/requests_work1/common/env.yaml)
+- [测试用例](/requests_work1/test_request.py)
+
 #appium框架作业2
 - [steps封装](/appium_work3/page/base_page.py)
 - [PO维护目录](/appium_work3/page)
