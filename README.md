@@ -1,6 +1,12 @@
 ## 霍格沃兹测试学院拉勾名企直推营第五期演练作品
 
 ## 作业列表
+#接口实战作业2
+- [request接口封装](/requests_work2/common/base.py)
+- [环境配置yml](/requests_work2/common/env.yaml)
+- [request接口建模](/requests_work2/common/member_req.py)
+- [测试用例](/requests_work2/testcase/test_request.py)
+
 #接口实战作业1
 - [request接口封装](/requests_work1/common/base.py)
 - [环境配置yml](/requests_work1/common/env.yaml)
