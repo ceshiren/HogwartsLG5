@@ -12,13 +12,13 @@ class TestAddMember():
 
     def test_add_member(self):
 
-        result = self.main.goto_add_member().add_member("崔丝塔娜").get_list()
+        result = self.main.goto_add_member().add_member("崔丝塔娜").get_member_list()
         assert "崔丝塔娜" in result
 
     def test_add_member_fail(self):
         # 实例化MainPage类
 
-        result = self.main.goto_add_member().add_member_fail("崔丝塔娜").get_list()
+        result = self.main.goto_add_member().add_member_fail("崔丝塔娜").get_member_list()
         assert "崔丝塔娜" not in result
     # def teardown_class(self):
     #     self.driver.quit()

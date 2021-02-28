@@ -26,3 +26,8 @@ class AddMemberPage(BasePage):
         self.find(By.CSS_SELECTOR, ".js_btn_save").click()
         self.find(By.CSS_SELECTOR, ".js_btn_cancel").click()
         return ContactPage(self.driver)
+
+    def add_department(self, dname):
+        self.find(By.CSS_SELECTOR, ".member_colLeft_top_addBtn").click()
+        # return ContactPage(self.driver)
+        return True

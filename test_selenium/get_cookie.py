@@ -12,7 +12,7 @@ def get_cookie():
     # chrome_arg.debugger_address = '127.0.0.1:9333'
     # driver = webdriver.Chrome(options=chrome_arg)
     driver = webdriver.Chrome()
-    time.sleep(10)
+    # time.sleep(10)
     driver.get("https://work.weixin.qq.com/wework_admin/frame")
     time.sleep(10)
     cookies = driver.get_cookies()
