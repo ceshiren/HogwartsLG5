@@ -14,7 +14,7 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def send(self, locator, key):
-        return self.find(*locator).send_keys(key)
+        return self.find(locator).send_keys(key)
 
     def find_and_click(self, locator):
         self.find(locator).click()
@@ -32,13 +32,14 @@ class BasePage:
 
     def run_steps(self, path, operation):
         with open(path, "r", encoding="utf-8") as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
         steps = data[operation]
         for step in steps:
             if step['action'] == "find_and_click":
                 self.find_and_click(step['locator'])
 
             elif step['action'] == "send":
+                # print(step['locator'], step['key'])
                 self.send(step['locator'], step['key'])
 
             elif step['action'] == "scroll_find_click":

@@ -2,9 +2,9 @@ import time
 
 from appium.webdriver.common.mobileby import MobileBy
 
-from test_python.src.appium_frame.common.DecoratorXueqiu import black_list
-from test_python.src.appium_frame.base_page import BasePage
-from test_python.src.appium_frame.pages.market_page import MarketPage
+from test_python.src.data_driver.common.DecoratorXueqiu import black_list
+from test_python.src.data_driver.base_page import BasePage
+from test_python.src.data_driver.pages.market_page import MarketPage
 
 
 class MainPage(BasePage):

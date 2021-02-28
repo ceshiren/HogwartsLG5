@@ -9,6 +9,7 @@ class TestContact:
         self.app.stop()
 
     def test_blacker(self):
-        result = self.app.start().goto_main().goto_market().goto_search().search_stocks()
+        result = self.app.start().goto_main().goto_market().goto_search().input_keyword().search_stocks()
+
         assert result
 

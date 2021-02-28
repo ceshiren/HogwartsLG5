@@ -19,7 +19,7 @@ class AppPage(BasePage):
     def read_capbilities(self):
         path = os.path.dirname(__file__).__add__("/datas/capbilities.yaml")
         with open(path, 'r') as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
 
             desired_caps = {'platformName': data['platformName'], 'platformVersion': data['platformVersion'],
                             'deviceName': data['deviceName'],  'appPackage': data['appPackage'],

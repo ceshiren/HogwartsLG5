@@ -9,7 +9,7 @@ from test_python.src.data_driver.pages.market_page import MarketPage
 
 class MainPage(BasePage):
     def goto_market(self):
-        self.run_steps("../page/main_page.yaml", "goto_market")
+        self.run_steps("../pages/main_page.yaml", "goto_market")
         return MarketPage(self.driver)
 
     def goto_mine(self):
