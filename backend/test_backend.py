@@ -28,3 +28,13 @@ def test_testcase_post():
         }
     )
     assert r.status_code == 200
+
+def test_execution():
+    r=requests.post(
+        'http://127.0.0.1:5000/execution',
+        json={
+            'testcase_id': 1
+        }
+    )
+    assert r.status_code == 200
+
