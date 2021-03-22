@@ -1,15 +1,14 @@
-import  requests
+import requests
 
 def test_testcase_post():
     r=requests.post(
         'http://127.0.0.1:5000/testcase',
         json={
-            'id':1,
+            'id':3,
             'name':'testcase1',
             'steps':['step1','step2']
         }
     )
-    print(r.json())
     assert r.status_code == 200;
 
 def test_testcase_delete():

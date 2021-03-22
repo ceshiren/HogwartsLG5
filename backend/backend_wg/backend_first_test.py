@@ -1,17 +1,19 @@
 import json
 
-from flask import  Flask,flash,request
-from flask_restful import  Resource,Api
+from flask import Flask, flash, request
+from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 api = Api(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hogworts:hogworts@47.110.37.80:49158/test_platform?charset=utf8mb4'
+app.config[
+    'SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hogworts:hogworts@47.110.37.80:49158/test_platform?charset=utf8mb4'
 db = SQLAlchemy(app)
 
 '''
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/
 '''
+
 class TestCase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=False, nullable=False)
@@ -24,8 +26,10 @@ class TestCase(db.Model):
 https://flask-restful.readthedocs.io/en/latest/quickstart.html#
     
 """
+
 class TestCaseServices(Resource):
-    #testcases=[]
+    # testcases=[]
+
     def get(self):
         # name =  request.args.get('name',None)
         # if name:
@@ -34,39 +38,38 @@ class TestCaseServices(Resource):
         #             return item
         # else:
         #     return self.testcases
-        name = request.args.get('name',None)
+        name = request.args.get('name', None)
         if name:
-            testcase = TestCase.query.filter_by(name = name).first()
-            return {'code':"0000",'message':str(testcase),'success':True}
+            testcase = TestCase.query.filter_by(name=name).first()
+            return {'code': "0000", 'message': str(testcase), 'success': True}
         else:
             testcases = TestCase.query.all()
-            return  {'code':"0000",'message':[str(testcase) for testcase in testcases],'success':True}
+            return {'code': "0000", 'message': [str(testcase) for testcase in testcases], 'success': True}
+
     def post(self):
+
         # testcase = request.json
         # self.testcases.append(testcase)
         # app.logger.info({"testcase":testcase})
         # app.logger.info({"post testcases":self.testcases})
         #
         # return self.testcases
-        requert_name = request.args.get('name',None)
+        name = request.json.get('name'),
+
         testcase = TestCase(
             id=request.json.get("id"),
             name=request.json.get('name'),
             steps=json.dumps(request.json.get("steps"))
         )
 
-        if requert_name:
-            query_testcase = TestCase.query.filter_by(name = requert_name).first()
-            if query_testcase:
-                return {'code': "0001", 'message': f'{requert_name} is existed', 'success': False}
-            else:
-                db.session.add(testcase)
-                db.session.commit()
-                testcase = TestCase.query.filter_by(name=requert_name).first()
-                return {'code': "0000", 'message': str(testcase), 'success': True}
-
+        query_testcase = TestCase.query.filter_by(name=name).first()
+        if query_testcase:
+            return {'code': "0001", 'message': f'{name} is existed', 'success': False}
         else:
-            return {'code': "0002", 'message': f'{requert_name} is not found,please check', 'success': False}
+            db.session.add(testcase)
+            db.session.commit()
+            testcase = TestCase.query.filter_by(name=name).first()
+            return {'code': "0000", 'message': str(testcase), 'success': True}
 
 
     def put(self):
@@ -93,7 +96,7 @@ class TestCaseServices(Resource):
             else:
                 db.session.add(testcase)
                 db.session.commit()
-                return {'code':"0000",'message':'completed','success':True}
+                return {'code': "0000", 'message': 'completed', 'success': True}
         else:
             return {'code': "0002", 'message': f'{name} is not found,please check', 'success': False}
 
@@ -107,11 +110,12 @@ class TestCaseServices(Resource):
         if testcase:
             db.session.delete(testcase)
             db.session.commit()
-            return {'code':"0000",'message':'completed','success':True}
+            return {'code': "0000", 'message': 'completed', 'success': True}
         else:
-            return {'code':"0001", 'message': f'{name} is not found', 'success':False}
+            return {'code': "0001", 'message': f'{name} is not found', 'success': False}
 
-api.add_resource(TestCaseServices,'/testcase')
+
+api.add_resource(TestCaseServices, '/testcase')
 
 if __name__ == '__main__':
     app.run(debug=True)
