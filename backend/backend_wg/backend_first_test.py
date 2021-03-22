@@ -90,6 +90,7 @@ class TestCaseServices(Resource):
             steps=json.dumps(request.json.get("steps"))
         )
         if name:
+            #name=name 中间不可以加空格
             query_testcase = TestCase.query.filter_by(name=name).first()
             if query_testcase:
                 return {'code': "0001", 'message': f'{name} is existed', 'success': False}
