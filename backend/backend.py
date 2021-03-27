@@ -1,11 +1,13 @@
 import json
 
 from flask import Flask, request
+from flask_cors import CORS
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from jenkinsapi.jenkins import Jenkins
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://lagou5:hogwarts@stuq.ceshiren.com:23306/lagou5db?charset=utf8mb4'
@@ -28,6 +30,13 @@ class TestCase(db.Model):
     def __repr__(self):
         return '<TestCase %r>' % self.name
 
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'steps': self.steps
+        }
+
 
 # 测试用例的管理
 class TestCaseService(Resource):
@@ -40,7 +49,7 @@ class TestCaseService(Resource):
         else:
             testcases = TestCase.query.all()
             app.logger.info({'testcases': testcases})
-            return [str(testcase) for testcase in testcases]
+            return [testcase.as_dict() for testcase in testcases]
 
     def post(self):
         testcase = TestCase(
@@ -123,8 +132,11 @@ class ExecutionService(Resource):
         jenkins.jobs['lagou5_testcase'].invoke(
             build_params={
                 'suite': json.dumps(suite.as_dict()),
-                'command': f'git clone https://github.com/ceshiren/HogwartsLG5.git .;'
-                           f'pytest {suite.testcases}'
+                'command': f'echo git clone https://github.com/ceshiren/HogwartsLG5.git .;'
+                           f'echo 安装虚拟环境与依赖'
+                           f'echo pytest {suite.testcases}'
+                           f'echo 回传结果 curl'
+
             }
         )
 
@@ -132,7 +144,8 @@ class ExecutionService(Resource):
 class Result:
     pass
 
-#jenkins通过curl命令或者全天的客户端工具，把测试结果，主要是junit.xml allure报告上传回来
+
+# jenkins通过curl命令或者全天的客户端工具，把测试结果，主要是junit.xml allure报告上传回来
 class ResultService(Resource):
     pass
 
