@@ -1,4 +1,4 @@
-from backend.backend_wg.backend_first_test import db
+from backend.backend_wg.TestCaseServices import db
 
 
 def test_create_db():
