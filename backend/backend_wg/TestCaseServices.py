@@ -1,9 +1,17 @@
+#!/usr/bin/env python
+# _*_ coding: utf-8 _*_
+# @Time : 2021/3/17 21:40
+# @Author : WG
+# @Version：V 0.1
+# @File : TestCaseServices.py
+# @desc :接口
+
 import json
 
 from flask import Flask, flash, request
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
-from SignServices import SignUpServices,SignInServices
+from SignServices import SignUpServices, SignInServices
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -17,6 +25,7 @@ db = SQLAlchemy(app)
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/
 '''
 
+
 class TestCase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=False, nullable=False)
@@ -25,11 +34,14 @@ class TestCase(db.Model):
     def __repr__(self):
         return '<TestCase %r>' % self.name
 
+
 """
 https://flask-restful.readthedocs.io/en/latest/quickstart.html#
     
 """
 
+
+@app.route('/')
 class TestCaseServices(Resource):
     # testcases=[]
 
@@ -74,7 +86,6 @@ class TestCaseServices(Resource):
             testcase = TestCase.query.filter_by(name=name).first()
             return {'code': "0000", 'message': str(testcase), 'success': True}
 
-
     def put(self):
         # name = request.args.get('name', None)
         # testcase = request.json
@@ -93,7 +104,7 @@ class TestCaseServices(Resource):
             steps=json.dumps(request.json.get("steps"))
         )
         if name:
-            #name=name 中间不可以加空格
+            # name=name 中间不可以加空格
             query_testcase = TestCase.query.filter_by(name=name).first()
             if query_testcase:
                 return {'code': "0001", 'message': f'{name} is existed', 'success': False}
@@ -119,10 +130,9 @@ class TestCaseServices(Resource):
             return {'code': "0001", 'message': f'{name} is not found', 'success': False}
 
 
-api.add_resource(TestCaseServices, '/testcase')
+# api.add_resource(TestCaseServices, '/testcase')
 api.add_resource(SignUpServices, '/user/register')
 api.add_resource(SignInServices, '/user/login')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
