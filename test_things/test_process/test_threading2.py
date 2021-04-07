@@ -15,7 +15,7 @@ import time
 
 class test_threading2(threading.Thread):
     def __init__(self, n):
-        super(test_threading2, self).__init__()   #重构run函数必须写
+        super(test_threading2, self).__init__()  # 重构run函数必须写
         self.n = n
 
     def run(self):
@@ -26,6 +26,7 @@ class test_threading2(threading.Thread):
 
 
 if __name__ == '__main__':
+    # print(dir(test_threading2))# 查看线程有哪些方法
     '''
     1.t2 设为守护进程，守护进程不一定执行到结束，主进程结束则立刻结束，主进程会等所有非守护进程的子进程结束。
     2.使用jion()可以使主进程等待守护进程
@@ -37,5 +38,5 @@ if __name__ == '__main__':
     t1.start()
     t2.start()
     t2.join()
-    print("end",datetime.datetime.now())
+    print("end", datetime.datetime.now())
     # t3.start()
