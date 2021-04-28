@@ -22,4 +22,4 @@ def steps(path):
 
 def test_foo():
     # 当步骤变化的时候,只用修改steps.yml文件
-    steps("./steps.yml")
+    steps("steps.yml")
