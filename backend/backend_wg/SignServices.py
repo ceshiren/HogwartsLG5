@@ -21,7 +21,6 @@ class TestUser(db.Model):
     username = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=False, nullable=False)
     password = db.Column(db.String(1000), unique=False, nullable=True)
-
     def __repr__(self):
         return '<TestCase %r>' % self.username
 
@@ -30,18 +29,30 @@ class TestUser(db.Model):
 https://flask-restful.readthedocs.io/en/latest/quickstart.html#
 
 """
-
+def read_res(file):
+    with open(file, encoding='utf-8') as f:
+        datas = json.load(f)
+        f.close()
+    return datas
 
 class SignUpServices(Resource):
     # testcases=[]
     def get(self):
-        username = request.args.get('username', None)
-        if username:
-            testcase = TestUser.query.filter_by(username=username).first()
-            return {'code': "0000", 'message': str(testcase), 'success': True}
+        education = request.args.get('education', None)
+        if education:
+            datas = read_res("test.json")
+            return datas,200,[("Access-Control-Allow-Credentials","true")]
+
+            # testcase = TestUser.query.filter_by(username=username).first()
+            # return {'code': "0000", 'message': str(testcase), 'success': True}
         else:
-            testcases = TestUser.query.all()
-            return {'code': "0000", 'message': [str(testcase) for testcase in testcases], 'success': True}
+            # return 响应体, 状态码, 响应头
+            datas = read_res("res.json")
+            app.logger.info(datas)
+            return datas,200,[("Access-Control-Allow-Credentials","true")]
+            # testcases = TestUser.query.all()
+            # return {'code': "0000", 'message': [str(testcase) for testcase in testcases], 'success': True}
+            #Access-Control-Allow-Credentials
 
     def post(self):
         username = request.json.get('username'),
@@ -82,7 +93,7 @@ class SignUpServices(Resource):
 
     def delete(self):
         name = request.json['username']
-        testcase = TestUser.query.filter_by(username=username).first()
+        testcase = TestUser.query.filter_by(username=name).first()
         if testcase:
             db.session.delete(testcase)
             db.session.commit()
@@ -113,9 +124,9 @@ class SignInServices(Resource):
             return {'code': "0000", 'message': str(testcase), 'success': True}
 
 
-api.add_resource(SignUpServices, '/user/register')
+api.add_resource(SignUpServices, '/cabinx/pcapi/table/data')
 api.add_resource(SignInServices, '/user/login')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=80)

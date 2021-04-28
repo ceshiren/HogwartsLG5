@@ -14,3 +14,4 @@ import pytest
 class test_ddt:
     @pytest.mark.parametrize()
     def test_add(self,a,b,c):
+        assert a+b == c

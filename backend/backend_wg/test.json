@@ -1,0 +1,21 @@
+{
+  "code": "0000",
+  "data": {
+    "totalCount": 100,
+    "pageSize": 50,
+    "currentPage": 1,
+    "pageCount": 2,
+    "result": [
+      {
+        "name": "龙娟",
+        "date": "2000-07-18",
+        "province": "西藏自治区",
+        "city": "宁德市",
+        "zip": "426175",
+        "address": "宁德市高除始路332号",
+        "education": "本科",
+        "occupation": "Java工程师"
+      }
+    ]
+  }
+}

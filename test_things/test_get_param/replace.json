@@ -1,0 +1,31 @@
+[
+  {
+    "name": {
+      "memberId": "${{memberId}}",
+      "password": "{{}}",
+      "loanId": "{{loanId}}",
+      "amount": "{loanId}",
+      "age": 18
+    }
+  },
+  {
+    "name2": [
+      {
+        "name3": "token{{loanId}}"
+      },
+      {
+        "age": "{{memberId}}"
+      },
+      {
+        "name3": [
+          "{{memberId}}",
+          {
+            "age2": {
+              "age3": "{{loanId}}}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
