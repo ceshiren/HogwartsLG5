@@ -1,7 +1,10 @@
 from time import sleep
 
+import pytest
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestAddContact:
@@ -18,7 +21,7 @@ class TestAddContact:
 
     def teardown(self):
         self.driver.quit()
-
+    @pytest.mark.run(order = 2)
     def test_add_contact(self):
         self.driver.find_element(MobileBy.XPATH, '//*[@text="通讯录"]').click()
         self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector().'
@@ -33,5 +36,6 @@ class TestAddContact:
         self.driver.find_element(MobileBy.ID, 'com.tencent.wework:id/gz').send_keys('杭州')
         self.driver.find_element(MobileBy.XPATH, '//*[@resource-id="com.tencent.wework:id/gur" and @text="确定"]').click()
         self.driver.find_element(MobileBy.XPATH, '//*[@resource-id="com.tencent.wework:id/gur" and @text="保存"]').click()
+        # WebDriverWait(self.driver,10).until(expected_conditions.element_to_be_clickable((MobileBy.XPATH,"")))
         res = self.driver.find_element(MobileBy.XPATH,'//*[@class="android.widget.Toast"]').text
         assert "添加成功" == res

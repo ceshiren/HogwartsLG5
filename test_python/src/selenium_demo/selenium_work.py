@@ -4,6 +4,7 @@ import os
 from time import sleep
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -21,7 +22,6 @@ class Testweixin():
 
     # def teardown_method(self):
     #     self.driver.quit()
-
     def test_cookie(self):
         # 获取  cookie
         # cookies = self.driver.get_cookies()
@@ -53,6 +53,9 @@ class Testweixin():
         sleep(3)
         self.driver.find_element(By.XPATH, "//*[@id='menu_contacts']").click()
 
+    def test_bound(self):
+        ele = self.driver.find_element_by_id("result_logo")
+        print(ele.location)
     def teardown_method(self):
         self.driver.quit()
 
