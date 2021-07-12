@@ -29,3 +29,7 @@ def test_dump_yaml():
         datas["list1"] = [1, 2, 3]
         yaml.safe_dump(datas, f)
         f.close()
+def test_yaml():
+    with open("test_yaml.yaml", "r", encoding="utf-8") as f:
+        origin = yaml.safe_load(f.read())
+        print(origin)

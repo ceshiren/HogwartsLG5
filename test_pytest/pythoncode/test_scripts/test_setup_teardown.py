@@ -19,6 +19,12 @@ def setup_function():
 def teardown_function():
     print("\nteardown_function:不在类中的用例执行后")
 
+def setup():
+    print("\nsetUp:每个用例开始前执行")
+
+def teardown():
+    print("\ntearDown:每个用例结束执行")
+
 def test_three():
     print("正在执行test three")
 
@@ -36,8 +42,17 @@ class TestClass():
         print("\nsetup_method:每个用例开始前执行")
     def teardown_method(self):
         print("\nteardown_method:每个用例结束执行")
+    def setup(self):
+        print("\nsetUp:每个用例开始前执行")
+    def teardown(self):
+        print("\ntearDown:每个用例结束执行")
 
     def test_one(self):
         print("正在执行test one")
     def test_two(self):
         print("正在执行test two")
+
+
+
+if __name__ == '__main__':
+   pytest.main()
