@@ -1,15 +1,27 @@
 from jenkinsapi.jenkins import Jenkins
+from jenkinsapi.job import *
+# def test_jenkins():
+#     jenkins = Jenkins(
+#         'http://106.53.106.215:8081/',
+#         username='john',
+#         password='110440d03256a94eb905c545d22afddf20',
+#         # useCrumb= True
+#     )
 
 
 def test_jenkins():
     jenkins = Jenkins(
-        'http://stuq.ceshiren.com:8020/',
-        username='seveniruby',
-        password='11d937bfe0f5cdf06fb70074e12dfcac6c'
+        'http://192.168.50.232:8081/',
+        username='john',
+        password='113353d2bafd76427f8b39640853e81e6d',
+        # useCrumb=True
     )
-
     print(jenkins.keys())
     print(jenkins.version)
-    print(jenkins.jobs.keys())
-    print(jenkins.views.keys())
-    jenkins.jobs.build("demo")
+    print(jenkins.jobs)
+    print(jenkins.get_jobs())
+    # for job_name in jenkins.keys():
+    #     my_job = jenkins.get_job(job_name)
+    #     print(job_name)
+    #     print(my_job)
+    #     jenkins.build_job(my_job)

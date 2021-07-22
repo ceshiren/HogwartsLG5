@@ -9,18 +9,16 @@ from jenkinsapi.jenkins import Jenkins
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-app.config[
-    'SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://lagou5:hogwarts@stuq.ceshiren.com:23306/lagou5db?charset=utf8mb4'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:songzhaoruizx@127.0.0.1:3306/python?charset=utf8mb4'
 db = SQLAlchemy(app)
 
-jenkins = Jenkins(
-    'http://stuq.ceshiren.com:8020/',
-    username='seveniruby',
-    password='11d937bfe0f5cdf06fb70074e12dfcac6c'
-)
+# jenkins = Jenkins(
+#
+#     'http://localhost:8081/',
+#     username='john',
+#     password='11e79888ce5aec90cfacae0bdfdb673b71'
+# )
 
-
-# testcases = []
 
 class TestCase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -124,21 +122,20 @@ class SuiteService(Resource):
 
 
 # 根据套件的id，取到对应的存在的套件，并把套件的数据发送给jenkins进行执行
-class ExecutionService(Resource):
-    def post(self):
-        suite_id = request.json.get('suite_id')
-        suite = Suite.query.filter_by(id=suite_id).first()
-
-        jenkins.jobs['lagou5_testcase'].invoke(
-            build_params={
-                'suite': json.dumps(suite.as_dict()),
-                'command': f'echo git clone https://github.com/ceshiren/HogwartsLG5.git .;'
-                           f'echo 安装虚拟环境与依赖'
-                           f'echo pytest {suite.testcases}'
-                           f'echo 回传结果 curl'
-
-            }
-        )
+# class ExecutionService(Resource):
+#     def post(self):
+#         suite_id = request.json.get('suite_id')
+#         suite = Suite.query.filter_by(id=suite_id).first()
+#
+#         jenkins.jobs['lagou5_testcase'].invoke(
+#             build_params={
+#                 'suite': json.dumps(suite.as_dict()),
+#                 'command': f'echo git clone https://github.com/ceshiren/HogwartsLG5.git .;'
+#                            f'echo 安装虚拟环境与依赖'
+#                            f'echo pytest {suite.testcases}'
+#                            f'echo 回传结果 curl'
+#             }
+#         )
 
 
 class Result:
@@ -154,9 +151,18 @@ class Report:
     pass
 
 
+class NasOperate(Resource):
+    def post(self):
+        ba = basic_API()
+        ban_id = "6002698378254500b9eb66d1"  # 6079336ad0845d2d5d603e2a johnnyR
+        accounts = ba.get_shared_account(ban_id)
+        print(accounts)
+        ba.make_normal(accounts)
+
+
 api.add_resource(TestCaseService, '/testcase')
 api.add_resource(SuiteService, '/suite')
-api.add_resource(ExecutionService, '/execution')
+# api.add_resource(ExecutionService, '/execution')
 
 if __name__ == '__main__':
     app.run(debug=True)
