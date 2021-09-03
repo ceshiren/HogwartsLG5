@@ -54,8 +54,8 @@ class basic_API:
     # 上传image,获取image的url /api-getway/image
     def image(self, file):
         url = "https://dev.apiteamn.com/api-getway/image"
-        with open("/Users/pof/PycharmProjects/workfast/NAS/image/" + file, 'rb')as f:
-            pic = {"image": ("01.jpeg", f.read(), "image/jpeg")}
+        with open("/Users/pof/PycharmProjects/HogwartsLG5/backend/" + file, 'rb')as f:
+            pic = {"image": ("pic.jpeg", f.read(), "image/jpeg")}
         body = {}
         r = requests.post(url=url, data=body, files=pic, cert=woop)
         return r.json()['data']['url']
@@ -71,7 +71,7 @@ class basic_API:
             "platform": 0,
             "token": password,
             "device": {
-                "device_id": user_name,
+                "device_id": "device_" + user_name,
                 "device_type": 1,
                 "os_version": "6.2.0",
                 "device_token": "000000",
@@ -121,12 +121,13 @@ class basic_API:
         r = requests.get(url=url, headers=header, cert=nas)
         account = r.json()['data']['accounts']
         accounts = []
+        # accounts.append(ban_id)
         print("关联账号有 " + str(len(account)) + " 个")
         for i in range(0, len(account)):
             if r.json()['data']['accounts'][i]['status'] == 5:
                 accounts.append(account[i]['id'])
-        print("其中被状态为ban的有" + str(len(accounts)) + " 个,将对接下来的账号进行恢复normal")
-        return accounts
+        print("关联被ban的以及本身" + str(len(accounts)) + " 个,将对接下来的账号进行恢复normal")
+        return [len(account), len(accounts), accounts]
 
     # make_normal 将被ban的账号恢复normal
     def make_normal(self, accounts):
@@ -138,10 +139,9 @@ class basic_API:
             'reason': None
         }
         for uid in accounts:
-            url = "https://nas.apiteamn.com/api/user/" + uid + "/1"
+            url = "https://nas.apiteamn.com/api/user/" + str(uid) + "/1"
             r = requests.post(url=url, data=json.dumps(body), headers=header, cert=nas)
             print(r.json())
-        return None
 
     # 创建视频id
     def create_video_id(self, token):
