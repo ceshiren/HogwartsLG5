@@ -1,8 +1,9 @@
 import base64
 import json
+import os
 from hashlib import md5
 from time import sleep
-
+import redis
 import requests
 import urllib3
 
@@ -32,7 +33,7 @@ class basic_API:
         r = requests.post(url=url, data=json.dumps(body), cert=nas)
         return r.json()['data']['token']
 
-    # 通过后台搜索，获取最新用户johnny*  的display_name
+    # 通过后台搜索，获取最新用户johnny*  的display_name数
     def get_user_dispalyname(self, nas_token):
         url = "https://dev-nas.apiteamn.com/api/profile/search"
         body = {
@@ -223,87 +224,271 @@ class basic_API:
             # contact(1,2050)
         }
         r = requests.post(url=url, headers=header, data=json.dumps(body), cert=nas)
-
-
-# 批量获取用户id
-def getuserid_many():
-    url = "https://dev.apiteamn.com/api-getway/login"
-    password = md5(("johnny" + "9BE72424-F231-477D-B4E4-0DEEE7E52606").encode()).hexdigest()
-    user_names = []
-    user_ids = []
-    for i in range(300, 320):
-        user_names.append('johnny' + str(i))
-    for user_name in user_names:
-        user_name = user_name + "@gmail.com"
+    def login(self, uname, password):
+        url = "https://dev-nas.apiteamn.com/api-getway/login"
         body = {
-            "platform_id": user_name,
+            "platform_id": uname + '@gmail.com',
             "platform": 0,
             "token": password,
             "device": {
-                "device_id": "johnny9999",
+                "device_id": "device_"+str(uname),
                 "device_type": 3,
-                "machine": "postman",
+                "machine": "iphone7",
                 "language": "en-CN;q=1, zh-Hans-CN;q=0.9, ja-CN;q=0.8",
                 "os_version": "1.0.0",
-                "device_token": "{{device_token}}",
-                "vpn_on": True,
+                "device_token": "000000",
+                "vpn_on": False,
                 "app_build": 60200
             }
         }
         r = requests.post(url, json.dumps(body), cert=woop)
-        print(r.json())
-        user_id = r.json()['data']['user']['user_id']
-        user_ids.append(user_id)
-    return user_ids
 
+    """
+        desc: 批量创建会话
+        params: uid:被会话的人的id
+                number：需要建立会话的条数。通过读取token文档，选取auto_test进行建立
+                type: 会话建立类型 2-Say Hi会话；4-Vip会话
+        use: create_chat('6124704ae5d21dbf9a5e49cf'，50)
+        return： null
+    """
+    def create_chat(self, uid, number, chat_type):
+        basic_API().refresh_token(number)
+        with open('./user_data/user_token.txt', 'r') as f:
+            tokens = f.readlines()
+        url = "https://dev.apiteamn.com/api-getway/conversation/create"
+        for i in range(0, number):
+            auth_token = tokens[i].replace("\n", "")
+            header = {"Authorization": auth_token}
+            body = {
+                "target_id": uid,
+                "type": chat_type,  # 2-Say Hi  4-VIP会话
+            }
+            r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
+            print(r.json())
+            # sleep(1)
 
-# 批量block
-def block_many(user_ids):
-    url = "https://dev.apiteamn.com/api-getway/user/block/add"
-    auth_token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjIjoxNjI1NjIyODQ2LCJleHAiOjE2MjYyMjc2NDYsImlkIjoiNjBjOTYyZmJlNTQyY2EyMThlMDY3NDUxIiwidiI6MX0.YSadl-HyGMIT5aLGgtCytL5oIx7DHG2vIDPIlkiAEIw"
-    header = {"Authorization": auth_token}
-    for user_id in user_ids:
+    """
+        desc: 批量like
+        params: token：需要进行like一堆人的用户token
+        use: like_many(eyJhbGciOiJIUzI1NiIsInR5cCI6... ，50)
+        return： null
+    """
+    def like_many(self, token, number):
+        basic_API().refresh_token(number)
+        url = "https://dev.apiteamn.com/api-getway/cards/slide"
+        auth_token = "Bearer " + token
+        header = {"Authorization": auth_token}
+        with open('./user_data/user_id.txt', 'r') as f:
+            ids = f.readlines()
+        for i in range(0, number):
+            user_id = ids[i].replace("\n", "")
+            body = {
+                    'match_type': 0,
+                    "liked": [user_id],
+            }
+            r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
+            # print(r.json())
+
+    """
+        desc: 批量block
+        params: token：需要进行block一堆人的用户token
+        use: block_many(eyJhbGciOiJIUzI1NiIsInR5cCI6... ，50)
+        return： null
+    """
+    def block_many(self, token, number):
+        basic_API().refresh_token(number)
+        url = "https://dev.apiteamn.com/api-getway/user/block/add"
+        auth_token = "Bearer " + token
+        header = {"Authorization": auth_token}
+        with open('./user_data/user_id.txt', 'r') as f:
+            ids = f.readlines()
+        for i in range(0, number):
+            user_id = ids[i].replace("\n", "")
+            body = {
+                "target_id": user_id
+            }
+            r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
+            # print(r.json())
+
+    """
+        desc: 被批量like
+        params: userid：被批量like的一群人
+                number：需要被like的数量
+        use:beliked_many(6124704fe5d21dbf9a5e49d3，50)
+        return： null
+    """
+    def beliked_many(self, userid, number):
+        basic_API().refresh_token(number)
+        with open('./user_data/user_token.txt', 'r') as f:
+            tokens = f.readlines()
+        # with open('./user_data/user_name.txt', 'r') as f2:
+        #     names = f2.readlines()
+        url = "https://dev.apiteamn.com/api-getway/cards/slide"
+        for i in range(0, number):
+            auth_token = tokens[i].replace("\n", "")
+            # name = names[i].replace('\n', '')
+            header = {"Authorization": auth_token}
+            bodys = {
+                        'match_type': 0,
+                        "liked": [userid],
+                     }
+            r = requests.post(url=url, headers=header, data=json.dumps(bodys),
+                              cert=woop)
+            # print(r.json())
+            # print(f"ok!{name} liked you!")
+            # sleep(1)
+
+    """
+        desc: 批量点赞moment
+        params: number：需要被like的数量
+                moment_id，media_id：当前moment则相同，点赞他人评论，则media_id为评论的id
+                target_author：作者的id，名字，性别
+        use:  ba.moment_like(100, "611f27bf20c513ef91a91b17", "611f27bf20c513ef91a91b17",
+                    ["611e1b53935e8dded0b6b2e5", "Ashley2045", 2])
+        return： null
+    """
+    def moment_like(self, number, moment_id, media_id, target_author):
+        basic_API().refresh_token(number)
+        with open('./user_data/user_token.txt', 'r') as f:
+            tokens = f.readlines()
+        url = "https://dev.apiteamn.com/api-getway/moment/like"
         body = {
-            "target_id": user_id
+                "moment_id": moment_id,
+                "media_id": media_id,
+                "target_author": {
+                    "id": target_author[0],
+                    "name": target_author[1],
+                    "gender": target_author[2]
+                }
         }
-        r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
-        print(r.json())
+        for i in range(0, number):
+            auth_token = tokens[i].replace("\n", "")
+            header = {"Authorization": auth_token}
+            r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
+            print(r.json())
 
+        """
+            desc: 评论moment
+            params: number：需要被like的数量
+                    moment_id，media_id：当前moment则相同，点赞他人评论，则media_id为评论的id
+                    target_author：作者的id，名字，性别
+            use:  ba.moment_like(100, "611f27bf20c513ef91a91b17", "611f27bf20c513ef91a91b17",
+                        ["611e1b53935e8dded0b6b2e5", "Ashley2045", 2])
+            return： null
+        """
+    def comment_moment(self, number, moment_id, media_id, target_author):
+        basic_API().refresh_token(number)
+        with open('./user_data/user_token.txt', 'r') as f:
+            tokens = f.readlines()
+        url = "https://dev.apiteamn.com/api-getway/moment/comment"
+        body = {
+                "moment_id": moment_id,
+                "media_id": media_id,  # 一级评论id
+                # "content": "😭nancy,我好艰难啊",
+                "content": "👿我，秦始皇，打钱╭(╯ε╰)╮",
+                "target_author": {
+                    "id": target_author[0],
+                    "name": target_author[1],
+                    "gender": target_author[2],
+                    "avatar": None,
+                    "deep_link": None
+                }
+                # "reference": {  # 要at的评论的作者
+                #     "author": {
+                #         "id": target_author[0],
+                #         "name": target_author[1],
+                #         "gender": target_author[2]
+                #     },
+                #     "id": target_author[0],  # 要at的评论id
+                #     "content": "好耶"  # 要at的评论内容
+                # }
+        }
+        for i in range(0, number):
+            auth_token = tokens[i].replace("\n", "")
+            header = {"Authorization": auth_token}
+            r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
+            print(r.json())
 
-# 注册+approve
-def signup_approve():
-    ba = basic_API()
-    nas_token = ba.get_nas_token()  # nas 登录
-    num = ba.get_user_dispalyname(nas_token)  # 搜索最新的name序号
-    raw_url = ba.image("01.jpeg")  # 上传图片
-    signup = ba.sign_up(int(num) + 1, raw_url)  # 注册
-    uid = signup['data']['user']['user_id']  # 获取用户id
-    ba.change_photostatus(uid, nas_token, raw_url, 0, None)  # approve
+    """
+        desc: 发送moment
+        params: number：需要发送的数量
+        use:  send_moment(10)
+        return： null
+    """
+    def send_moment(self, number):
+        url = "https://dev.apiteamn.com/api-getway/moment/"
+        body = {
+            "kind": 100,
+            "topic_id": "5e17e49be39d588c891e6459",
+            "photos": [{
+                "url": "2021/09/10/613b1740b8fe285af4cfa4d2",
+                "width": 1365,
+                "height": 1024
+            }],
+            "location": {
+                "lat": 30.5971505,
+                "lon": 104.0608851
+            },
+            "address": "Chengdu Shi, Sichuan Sheng, China"
+        }
+        with open('./user_data/user_token.txt', 'r') as f:
+            tokens = f.readlines()
+        for i in range(0, number):
+            token = tokens[i].replace("\n", "")
+            header = {"Authorization": token}
+            r = requests.post(url=url, headers=header, data=json.dumps(body), cert=woop)
+            print(r.json())
 
+    # 更新token
+    def refresh_token(self, num):
+        url = "https://dev.apiteamn.com/api-getway/login"
+        password = md5(("johnny" + "9BE72424-F231-477D-B4E4-0DEEE7E52606").encode()).hexdigest()
+        user_names = []
+        with open("./user_data/user_token.txt", 'w') as clear_f:
+            clear_f.write("")
+        for i in range(0, num):
+            user_names.append('johnny_autotets' + str(i))
+        for user_name in user_names:
+            user_name = user_name + "@gmail.com"
+            body = {
+                "platform_id": user_name,
+                "platform": 0,
+                "token": password,
+                "device": {
+                    "device_id": "device_" + user_name,
+                    "device_type": 3,
+                    "machine": "postman",
+                    "language": "en-CN;q=1, zh-Hans-CN;q=0.9, ja-CN;q=0.8",
+                    "os_version": "1.0.0",
+                    "device_token": "{{device_token}}",
+                    "vpn_on": True,
+                    "app_build": 60400
+                }
+            }
+            r = requests.post(url, json.dumps(body), cert=woop)
+            # print(r.json())
+            token = r.json()['data']['token']
+            auth_token = "Bearer " + token
+            with open("./user_data/user_token.txt", 'a') as f3:
+                f3.write(auth_token + '\n')
 
-# 注册+强制认证
-def signup_tbv():
-    ba = basic_API()
-    nas_token = ba.get_nas_token()  # nas 登录
-    num = ba.get_user_dispalyname(nas_token)  # 搜索最新的name序号
-    raw_url = ba.image("01.jpeg")  # 上传图片
-    signup = ba.sign_up(int(num) + 1, raw_url)  # 注册
-    uid = signup['data']['user']['user_id']  # 获取用户id
-    ba.change_photostatus(uid, nas_token, raw_url, 1, 2030)  # tbv
+    # 连接redis
+    def connect_redis(self):
+        r = redis.StrictRedis(host='stage.z1p6ym.ng.0001.ape1.cache.amazonaws.com', port=6379, db=0)
 
+     #清空redis的ly数据，用于创造free trail
+    def delete_ly_data(self):
+        pass
 
-# 批量注入视频
-def authvideo():
-    ba = basic_API()
-    nas_token = ba.get_nas_token()  # nas 登录
-    uids = getuserid_many()
 
 
 
 if __name__ == "__main__":
     ba = basic_API()
-    ban_id = "6002698378254500b9eb66d1"  # 6079336ad0845d2d5d603e2a johnnyR
-    accounts = ba.get_shared_account(ban_id)
-    print(accounts)
-    ba.make_normal(accounts)
+    # ban_id = "6002698378254500b9eb66d1"  # 6079336ad0845d2d5d603e2a johnnyR
+    # accounts = ba.get_shared_account(ban_id)
+    # print(accounts)
+    # ba.make_normal(accounts)
+
+    ba.connect_redis()
 

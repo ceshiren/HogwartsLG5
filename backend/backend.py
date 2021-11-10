@@ -127,84 +127,6 @@ class UserLogIn(Resource):
                 else:
                     return 1001
 
-"""
-# 测试套件，一个条件包含带有顺序的测试用例列表。
-# 更复杂的情况是一个套件，可以包含子套件，子套件之间具备串并行关系
-# xUnit概念
-# pytest dir => [test_1.py::test_a, test_1.py::test_b, test_2.py::test_c]
-# suite test_python.py
-# suite [test_1.py::test_a, test_1.py::test_b, test_2.py::test_c]
-class Suite(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=False, nullable=False)
-    testcases = db.Column(db.String(1000), unique=False, nullable=True)
-
-    def as_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'testcases': json.loads(self.testcases)
-        }
-
-    def __repr__(self):
-        return '<Suite id=%d name=%r >' % (self.id, self.name)
-
-
-class SuiteService(Resource):
-    def get(self):
-        id = request.args.get('id', None)
-        app.logger.info({'id': id})
-        if id:
-            suite = Suite.query.filter_by(id=id).first()
-            return str(suite)
-        else:
-            suites = Suite.query.all()
-            app.logger.info({'suites': suites})
-            return [suite.as_dict() for suite in suites]
-
-    def post(self):
-        suite = Suite(
-            name=request.json.get('name'),
-            testcases=json.dumps(request.json.get("testcases"))
-        )
-
-        db.session.add(suite)
-        db.session.commit()
-
-        suites = Suite.query.all()
-        return [str(suite) for suite in suites]
-
-
-# 根据套件的id，取到对应的存在的套件，并把套件的数据发送给jenkins进行执行
-# class ExecutionService(Resource):
-#     def post(self):
-#         suite_id = request.json.get('suite_id')
-#         suite = Suite.query.filter_by(id=suite_id).first()
-#
-#         jenkins.jobs['lagou5_testcase'].invoke(
-#             build_params={
-#                 'suite': json.dumps(suite.as_dict()),
-#                 'command': f'echo git clone https://github.com/ceshiren/HogwartsLG5.git .;'
-#                            f'echo 安装虚拟环境与依赖'
-#                            f'echo pytest {suite.testcases}'
-#                            f'echo 回传结果 curl'
-#             }
-#         )
-
-
-class Result:
-    pass
-
-
-# jenkins通过curl命令或者全天的客户端工具，把测试结果，主要是junit.xml allure报告上传回来
-class ResultService(Resource):
-    pass
-
-
-class Report:
-    pass
-"""
-
 class NasServe(Resource):
     def post(self):
         uid = request.json.get('uid')
@@ -249,15 +171,22 @@ class SignUpJohnny(Resource):
         res = ba.sign_up(int(ba.get_user_dispalyname(nas_token))+1, ba.image("./pic.jpeg"))
         return res
 
+class BeLikedMany(Resource):
+    def post(self):
+        ba = basic_API()
+        pass
+
+class BlockMany(Resource):
+    def post(self):
+        ba = basic_API()
+
 
 api.add_resource(TestCaseService, '/testcase')
-# api.add_resource(SuiteService, '/suite')
 api.add_resource(NasServe, '/makeNormal')
 api.add_resource(UserLogIn, '/signin')
 api.add_resource(UserSignup, '/signup')
 api.add_resource(DownloadLog, '/downloadLog')
 api.add_resource(SignUpJohnny, '/signUpJohnny')
-# api.add_resource(ExecutionService, '/execution')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

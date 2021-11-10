@@ -6,9 +6,9 @@ import boto3
 def download(args):
     s3 = boto3.resource('s3')
     # print("输入时间（空格）用户id，例如：2021-02-20 57ea449d7748abb7428b456a")
-    #t_u = args.args[0]
+    # t_u = args.args[0]
     print(args)
-    download_path = '/Users/pof/Downloads/feedback/'  # 修改为自己的保存路径
+    download_path = '/Users/pof/PycharmProjects/HogwartsLG5/'  # 修改为自己的保存路径
     log = 'wooplus-prod-client-log'
     t = '/' + args[0]
     user_id = '/' + args[1]
@@ -58,8 +58,6 @@ def download(args):
     os.system(zip_commend)
     os.system("rm -f " + zip_name + ".*")
     # os.system("rm -f " + zip_name)
-    # print("解压完成，可进行下一个用户的操作")
-    # 2021-06-17 6019ca199e9f959ed67b3e38
     # return zip_path + args[1] + "_sql"
     return zip_name
 
